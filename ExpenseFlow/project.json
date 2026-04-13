@@ -1,0 +1,102 @@
+{
+  "name": "ExpenseFlow",
+  "projectId": "00c90dd8-9a79-4726-849d-950a35a2d5d3",
+  "description": "Plataforma automatizada de gestão financeira pessoal e empresarial utilizando RPA",
+  "main": "Main.xaml",
+  "dependencies": {
+    "UiPath.Excel.Activities": "3.4.1",
+    "UiPath.GSuite.Activities": "[3.8.0-preview]",
+    "UiPath.MicrosoftOffice365.Activities": "[3.7.10]",
+    "UiPath.System.Activities": "[26.2.1]"
+  },
+  "webServices": [],
+  "entitiesStores": [],
+  "schemaVersion": "4.0",
+  "studioVersion": "26.0.189.0",
+  "projectVersion": "1.0.37",
+  "runtimeOptions": {
+    "autoDispose": false,
+    "netFrameworkLazyLoading": false,
+    "isPausable": true,
+    "isAttended": false,
+    "requiresUserInteraction": false,
+    "supportsPersistence": false,
+    "workflowSerialization": "NewtonsoftJson",
+    "excludedLoggedData": [
+      "Private:*",
+      "*password*"
+    ],
+    "executionType": "Workflow",
+    "readyForPiP": false,
+    "startsInPiP": false,
+    "mustRestoreAllDependencies": true,
+    "pipType": "ChildSession"
+  },
+  "designOptions": {
+    "projectProfile": "Developement",
+    "outputType": "Process",
+    "libraryOptions": {
+      "privateWorkflows": []
+    },
+    "processOptions": {
+      "ignoredFiles": []
+    },
+    "fileInfoCollection": [],
+    "saveToCloud": false
+  },
+  "expressionLanguage": "VisualBasic",
+  "entryPoints": [
+    {
+      "filePath": "Main.xaml",
+      "uniqueId": "5a39a5b6-5479-4d8a-8ed2-0867303f7e23",
+      "input": [],
+      "output": []
+    },
+    {
+      "filePath": "Workflows\\Gmail\\CapturarEmailsGmail.xaml",
+      "uniqueId": "89a7a7ec-dc01-4581-afd3-54b47c311b25",
+      "input": [],
+      "output": []
+    },
+    {
+      "filePath": "Workflows\\Processamento\\ExtrairDadosTransacao.xaml",
+      "uniqueId": "84efc0a8-f7ad-46b1-8b59-5e4b4a7ca5bd",
+      "input": [],
+      "output": []
+    },
+    {
+      "filePath": "Workflows\\Processamento\\EnviarParaAPI.xaml",
+      "uniqueId": "130dfad8-b233-4f49-a7fb-3bb20a68388a",
+      "input": [],
+      "output": []
+    },
+    {
+      "filePath": "Workflows\\Outlook\\CapturarEmailsOutlook.xaml",
+      "uniqueId": "dfeedd91-06e3-4536-84de-bd5882cd92bd",
+      "input": [],
+      "output": []
+    },
+    {
+      "filePath": "Workflows\\Processamento\\VerificarDuplicata.xaml",
+      "uniqueId": "e906845d-2884-4de5-97a4-3429ecef5849",
+      "input": [],
+      "output": []
+    },
+    {
+      "filePath": "Workflows\\InicializarPlanilha.xaml",
+      "uniqueId": "b78ca7e0-aef9-4fbb-abf0-2eba96f54eb9",
+      "input": [],
+      "output": []
+    },
+    {
+      "filePath": "Workflows\\EnviarParaAPI.xaml",
+      "uniqueId": "8b478886-2d63-4f13-a24e-2f3dca3628c9",
+      "input": [],
+      "output": []
+    }
+  ],
+  "isTemplate": false,
+  "templateProjectData": {},
+  "publishData": {},
+  "targetFramework": "Windows"
+}

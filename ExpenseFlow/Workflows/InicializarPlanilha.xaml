@@ -1,0 +1,377 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="InicializarPlanilha" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:ucas="clr-namespace:UiPath.Core.Activities.Storage;assembly=UiPath.System.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="UiPathEventConnector" Type="InArgument(x:String)" />
+    <x:Property Name="UiPathEvent" Type="InArgument(x:String)" />
+    <x:Property Name="UiPathEventObjectType" Type="InArgument(x:String)" />
+    <x:Property Name="UiPathEventObjectId" Type="InArgument(x:String)" />
+    <x:Property Name="UiPathAdditionalEventData" Type="InArgument(x:String)" />
+    <x:Property Name="in_CaminhoArquivo" Type="InArgument(x:String)" />
+  </x:Members>
+  <this:InicializarPlanilha.UiPathEventConnector>
+    <InArgument x:TypeArguments="x:String" />
+  </this:InicializarPlanilha.UiPathEventConnector>
+  <this:InicializarPlanilha.UiPathEvent>
+    <InArgument x:TypeArguments="x:String" />
+  </this:InicializarPlanilha.UiPathEvent>
+  <this:InicializarPlanilha.UiPathEventObjectType>
+    <InArgument x:TypeArguments="x:String" />
+  </this:InicializarPlanilha.UiPathEventObjectType>
+  <this:InicializarPlanilha.UiPathEventObjectId>
+    <InArgument x:TypeArguments="x:String" />
+  </this:InicializarPlanilha.UiPathEventObjectId>
+  <this:InicializarPlanilha.UiPathAdditionalEventData>
+    <InArgument x:TypeArguments="x:String" />
+  </this:InicializarPlanilha.UiPathAdditionalEventData>
+  <this:InicializarPlanilha.in_CaminhoArquivo>
+    <InArgument x:TypeArguments="x:String" />
+  </this:InicializarPlanilha.in_CaminhoArquivo>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>InicializarPlanilha_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>Microsoft.Win32.SafeHandles</x:String>
+      <x:String>System.Numerics</x:String>
+      <x:String>System.Net</x:String>
+      <x:String>System.Globalization</x:String>
+      <x:String>System.Configuration.Assemblies</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.CodeDom.Compiler</x:String>
+      <x:String>System.Buffers</x:String>
+      <x:String>System.Buffers.Text</x:String>
+      <x:String>System.Buffers.Binary</x:String>
+      <x:String>System.Threading</x:String>
+      <x:String>System.Threading.Tasks</x:String>
+      <x:String>System.Threading.Tasks.Sources</x:String>
+      <x:String>System.Text</x:String>
+      <x:String>System.Text.Unicode</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>System.Security.Principal</x:String>
+      <x:String>System.Security.Permissions</x:String>
+      <x:String>System.Security.Cryptography</x:String>
+      <x:String>System.Runtime</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Runtime.Remoting</x:String>
+      <x:String>System.Runtime.ExceptionServices</x:String>
+      <x:String>System.Runtime.ConstrainedExecution</x:String>
+      <x:String>System.Runtime.Versioning</x:String>
+      <x:String>System.Runtime.Loader</x:String>
+      <x:String>System.Runtime.Intrinsics</x:String>
+      <x:String>System.Runtime.Intrinsics.Wasm</x:String>
+      <x:String>System.Runtime.Intrinsics.Arm</x:String>
+      <x:String>System.Runtime.Intrinsics.X86</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Runtime.InteropServices.ObjectiveC</x:String>
+      <x:String>System.Runtime.InteropServices.Marshalling</x:String>
+      <x:String>System.Runtime.InteropServices.ComTypes</x:String>
+      <x:String>System.Runtime.CompilerServices</x:String>
+      <x:String>System.Resources</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Reflection.Metadata</x:String>
+      <x:String>System.Reflection.Emit</x:String>
+      <x:String>System.IO.Enumeration</x:String>
+      <x:String>System.Diagnostics.SymbolStore</x:String>
+      <x:String>System.Diagnostics.Contracts</x:String>
+      <x:String>System.Diagnostics.CodeAnalysis</x:String>
+      <x:String>System.Diagnostics.Tracing</x:String>
+      <x:String>System.Collections.Concurrent</x:String>
+      <x:String>Internal</x:String>
+      <x:String>System.CodeDom</x:String>
+      <x:String>Microsoft.CSharp</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Linq.Expressions.Interpreter</x:String>
+      <x:String>System.Dynamic</x:String>
+      <x:String>UiPath.Workflow.Runtime</x:String>
+      <x:String>System.Activities.Tracking</x:String>
+      <x:String>System.Activities.Statements.Tracking</x:String>
+      <x:String>System.Activities.Runtime</x:String>
+      <x:String>System.Activities.Runtime.DurableInstancing</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
+      <x:String>System.Activities.ParallelTracking</x:String>
+      <x:String>System.Activities.Hosting</x:String>
+      <x:String>System.Activities.Persistence</x:String>
+      <x:String>System.Activities.DurableInstancing</x:String>
+      <x:String>System.ComponentModel.Design.Serialization</x:String>
+      <x:String>System.Text.RegularExpressions</x:String>
+      <x:String>System.Security.Authentication.ExtendedProtection</x:String>
+      <x:String>System.Timers</x:String>
+      <x:String>System.ComponentModel.Design</x:String>
+      <x:String>System.Xml.Schema</x:String>
+      <x:String>System.Xml.Xsl</x:String>
+      <x:String>System.Xml.Xsl.Runtime</x:String>
+      <x:String>System.Xml.XPath</x:String>
+      <x:String>System.Xml.Resolvers</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>Microsoft.VisualBasic.FileIO</x:String>
+      <x:String>System.Security.Authentication</x:String>
+      <x:String>System.Net.Cache</x:String>
+      <x:String>System.Net.NetworkInformation</x:String>
+      <x:String>System.Net.Security</x:String>
+      <x:String>System.Net.Sockets</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>UiPath.Core.Activities.Storage</x:String>
+      <x:String>UiPath.Core.Activities.Orchestrator</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
+      <AssemblyReference>System.Security.Cryptography</AssemblyReference>
+      <AssemblyReference>System.Security.Principal.Windows</AssemblyReference>
+      <AssemblyReference>System.IO.MemoryMappedFiles</AssemblyReference>
+      <AssemblyReference>System.Diagnostics.Process</AssemblyReference>
+      <AssemblyReference>Microsoft.Win32.Registry</AssemblyReference>
+      <AssemblyReference>System.IO.Pipes</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+      <AssemblyReference>System.Net.WebClient</AssemblyReference>
+      <AssemblyReference>System.Net.Primitives</AssemblyReference>
+      <AssemblyReference>System.Net.HttpListener</AssemblyReference>
+      <AssemblyReference>System.Net.WebProxy</AssemblyReference>
+      <AssemblyReference>System.Net.NameResolution</AssemblyReference>
+      <AssemblyReference>System.Net.WebHeaderCollection</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Net.Requests</AssemblyReference>
+      <AssemblyReference>System.Net.ServicePoint</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.CodeDom</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Threading.AccessControl</AssemblyReference>
+      <AssemblyReference>System.Threading</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.GSuite.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.MicrosoftOffice365.Activities</AssemblyReference>
+      <AssemblyReference>System.Threading.Tasks.Parallel</AssemblyReference>
+      <AssemblyReference>System.Text.Encoding.CodePages</AssemblyReference>
+      <AssemblyReference>System.Text.Encodings.Web</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>System.Security.Claims</AssemblyReference>
+      <AssemblyReference>System.Security.Cryptography.Pkcs</AssemblyReference>
+      <AssemblyReference>System.Security.Cryptography.ProtectedData</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Text.Json</AssemblyReference>
+      <AssemblyReference>System.Windows.Forms.Design</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Runtime.CompilerServices.VisualC</AssemblyReference>
+      <AssemblyReference>System.Windows.Forms</AssemblyReference>
+      <AssemblyReference>System.Resources.Writer</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Diagnostics.StackTrace</AssemblyReference>
+      <AssemblyReference>System.Collections.Concurrent</AssemblyReference>
+      <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
+      <AssemblyReference>System.Net.Security</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Private.Xml.Linq</AssemblyReference>
+      <AssemblyReference>System.Xml.XPath.XDocument</AssemblyReference>
+      <AssemblyReference>System.Net.NetworkInformation</AssemblyReference>
+      <AssemblyReference>System.Net.Ping</AssemblyReference>
+      <AssemblyReference>System.Net.Sockets</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>NPOI.Core</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.Watcher</AssemblyReference>
+      <AssemblyReference>System.IO.Packaging</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.AccessControl</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap:VirtualizedContainerService.HintSize="1132,1679" sap2010:WorkflowViewState.IdRef="Sequence_14">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="Str_CaminhoTemplate" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_Dados" />
+      <Variable x:TypeArguments="x:String" Name="str_Assunto" />
+      <Variable x:TypeArguments="x:String" Name="str_Corpo" />
+      <Variable x:TypeArguments="x:String" Name="str_Data" />
+      <Variable x:TypeArguments="x:String" Name="str_Descricao" />
+      <Variable x:TypeArguments="x:Decimal" Name="dec_Valor" />
+      <Variable x:TypeArguments="x:String" Name="str_Categoria" />
+      <Variable x:TypeArguments="x:String" Name="str_Hash" />
+      <Variable x:TypeArguments="x:Boolean" Name="bln_Sucesso" />
+      <Variable x:TypeArguments="x:Boolean" Name="bln_Duplicata" />
+      <Variable x:TypeArguments="x:String" Name="str_FormaPagamento" />
+      <Variable x:TypeArguments="x:String" Name="str_ValorBruto" />
+      <Variable x:TypeArguments="x:String" Name="str_DataBruta" />
+      <Variable x:TypeArguments="x:String" Name="str_CorpoLower" />
+      <Variable x:TypeArguments="x:String" Name="in_CorpoEmail" />
+      <Variable x:TypeArguments="x:String" Name="in_AssuntoEmail" />
+      <Variable x:TypeArguments="x:String" Name="out_Data" />
+      <Variable x:TypeArguments="x:String" Name="out_Descricao" />
+      <Variable x:TypeArguments="x:Decimal" Name="out_Valor" />
+      <Variable x:TypeArguments="x:String" Name="out_Categoria" />
+      <Variable x:TypeArguments="x:String" Name="out_FormaPagamento" />
+      <Variable x:TypeArguments="x:String" Name="in_Data" />
+      <Variable x:TypeArguments="x:String" Name="in_Descricao" />
+      <Variable x:TypeArguments="x:Decimal" Name="in_Valor" />
+      <Variable x:TypeArguments="x:String" Name="in_Categoria" />
+      <Variable x:TypeArguments="x:String" Name="in_Origem" />
+      <Variable x:TypeArguments="x:Boolean" Name="out_Sucesso" />
+      <Variable x:TypeArguments="x:String" Name="in_FormaPagamento" />
+      <Variable x:TypeArguments="x:String" Name="in_ConnectionId" />
+      <Variable x:TypeArguments="x:String" Name="in_Hash" />
+      <Variable x:TypeArguments="x:Boolean" Name="out_Duplicata" />
+      <Variable x:TypeArguments="x:String" Name="str_CaminhoArquivo" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:ManualTrigger Result="{x:Null}" DisplayName="Manual Trigger" sap:VirtualizedContainerService.HintSize="522,79" sap2010:WorkflowViewState.IdRef="ManualTrigger_2" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="522,179" sap2010:WorkflowViewState.IdRef="LogMessage_5">
+      <ui:LogMessage.Level>
+        <InArgument x:TypeArguments="ui:LogLevel">
+          <Literal x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="Literal`1_7" Value="Info" />
+        </InArgument>
+      </ui:LogMessage.Level>
+      <ui:LogMessage.Message>
+        <InArgument x:TypeArguments="x:Object">
+          <VisualBasicValue x:TypeArguments="x:Object" ExpressionText="&quot;[InicializarPlanilha] Verificando arquivo de dados no Storage Bucket...&quot;" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_3" />
+        </InArgument>
+      </ui:LogMessage.Message>
+    </ui:LogMessage>
+    <TryCatch DisplayName="Tenta baixar o arquivo de dados principal do Storage Bucket. Se não existir, baixa o template." sap:VirtualizedContainerService.HintSize="522,1398" sap2010:WorkflowViewState.IdRef="TryCatch_3">
+      <TryCatch.Try>
+        <Sequence DisplayName="Tentar" sap:VirtualizedContainerService.HintSize="520,567" sap2010:WorkflowViewState.IdRef="Sequence_12">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Sequence DisplayName="Tentar" sap:VirtualizedContainerService.HintSize="486,507" sap2010:WorkflowViewState.IdRef="Sequence_11">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Sequence DisplayName="Tentar" sap:VirtualizedContainerService.HintSize="450,424" sap2010:WorkflowViewState.IdRef="Sequence_10">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ucas:DownloadStorageFile TimeoutMS="{x:Null}" DisplayName="Baixar o arquivo de dados principal do Storage Bucket" sap:VirtualizedContainerService.HintSize="416,171" sap2010:WorkflowViewState.IdRef="DownloadStorageFile_3">
+                <ucas:DownloadStorageFile.Destination>
+                  <InArgument x:TypeArguments="x:String">
+                    <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_CaminhoArquivo" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_4" />
+                  </InArgument>
+                </ucas:DownloadStorageFile.Destination>
+                <ucas:DownloadStorageFile.Path>
+                  <InArgument x:TypeArguments="x:String">
+                    <Literal x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="Literal`1_8">ExpenseFlow_Dados.xlsx</Literal>
+                  </InArgument>
+                </ucas:DownloadStorageFile.Path>
+                <ucas:DownloadStorageFile.StorageBucketName>
+                  <InArgument x:TypeArguments="x:String">
+                    <Literal x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="Literal`1_9">ExpenseFlow-bucket</Literal>
+                  </InArgument>
+                </ucas:DownloadStorageFile.StorageBucketName>
+              </ucas:DownloadStorageFile>
+              <ui:LogMessage DisplayName="Logar sucesso ao baixar o arquivo de dados" sap:VirtualizedContainerService.HintSize="416,170" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info">
+                <ui:LogMessage.Message>
+                  <InArgument x:TypeArguments="x:Object">
+                    <VisualBasicValue x:TypeArguments="x:Object" ExpressionText="&quot;[InicializarPlanilha] Arquivo de dados baixado do bucket com sucesso!&quot;" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_5" />
+                  </InArgument>
+                </ui:LogMessage.Message>
+              </ui:LogMessage>
+            </Sequence>
+          </Sequence>
+        </Sequence>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_3">
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="520,580" sap2010:WorkflowViewState.IdRef="Sequence_13">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="486,179" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Info" Message="[&quot;[InicializarPlanilha] Primeira execução - baixando template...&quot;]" />
+              <ucas:DownloadStorageFile TimeoutMS="{x:Null}" Destination="[in_CaminhoArquivo]" DisplayName="Download Storage File" sap:VirtualizedContainerService.HintSize="486,171" sap2010:WorkflowViewState.IdRef="DownloadStorageFile_4" Path="Template_ExpenseFlow.xlsx" StorageBucketName="ExpenseFlow-bucket" />
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="486,170" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;[InicializarPlanilha] Template baixado. Planilha criada!&quot;]" />
+            </Sequence>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+      <TryCatch.Finally>
+        <Sequence DisplayName="Finalmente" sap:VirtualizedContainerService.HintSize="520,92" sap2010:WorkflowViewState.IdRef="Sequence_15">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Sequence>
+      </TryCatch.Finally>
+    </TryCatch>
+  </Sequence>
+</Activity>

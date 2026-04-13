@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ExpenseFlow 2.0</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+
+  <main class="page">
+    <div class="card" id="card">
+
+      <div class="card-header">
+        <div class="brand">
+          <div class="brand-icon">💰</div>
+          <div>
+            <div class="brand-name">ExpenseFlow <span class="badge">2.0</span></div>
+            <div class="brand-sub">Gestão financeira automatizada via RPA</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulário -->
+      <section id="s-form" class="card-body">
+        <h1 class="section-title">Iniciar Processamento</h1>
+        <p class="section-desc">
+          Selecione a conta de e-mail e o robô irá capturar, extrair e categorizar
+          automaticamente todas as suas transações financeiras.
+        </p>
+
+        <div class="field">
+          <label class="field-label">Conta de e-mail</label>
+          <div class="input-wrap">
+            <svg class="input-icon" viewBox="0 0 20 20" fill="none">
+              <rect x="2" y="4" width="16" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M2 7l8 5 8-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <div class="custom-select" id="conta-select-wrap">
+              <button type="button" class="custom-select-btn" id="conta-select-btn">
+                <span class="custom-select-label placeholder-text" id="conta-select-label">
+                  Carregando contas...
+                </span>
+                <svg class="select-chevron" viewBox="0 0 24 24" fill="none" width="16" height="16">
+                  <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <ul class="custom-select-opts" id="conta-options"></ul>
+            </div>
+          </div>
+          <p class="field-error" id="conta-error"></p>
+        </div>
+
+        <button class="btn btn-primary" id="btn-start">
+          Iniciar Processamento
+          <svg viewBox="0 0 20 20" fill="none" width="18" height="18">
+            <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <div class="chips">
+          <span class="chip">📧 Gmail &amp; Outlook</span>
+          <span class="chip">🔍 Extração Regex</span>
+          <span class="chip">🔐 SHA-256</span>
+          <span class="chip">📊 Categorização</span>
+        </div>
+      </section>
+
+      <!-- Processando -->
+      <section id="s-processing" class="card-body hidden">
+        <div class="spinner-wrap">
+          <div class="spinner s-outer"></div>
+          <div class="spinner s-inner"></div>
+        </div>
+        <h1 class="section-title">Processando...</h1>
+        <p class="processing-for" id="proc-label"></p>
+        <div class="log-box" id="log-box"></div>
+        <p class="hint">O robô está capturando e categorizando suas despesas.<br/>Isso pode levar alguns minutos.</p>
+      </section>
+
+      <!-- Sucesso -->
+      <section id="s-success" class="card-body hidden">
+        <div class="result-icon icon-ok">
+          <svg viewBox="0 0 24 24" fill="none" width="30" height="30">
+            <path d="M4 12l5 5 11-10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h1 class="section-title">Concluído com sucesso!</h1>
+        <p class="section-desc" id="ok-desc"></p>
+        <div class="meta-box" id="ok-meta"></div>
+        <div class="action-row">
+          <a class="btn btn-primary" id="btn-download" href="/api/download" download>⬇ Baixar Excel</a>
+          <button class="btn btn-ghost" id="btn-new">Processar novamente</button>
+        </div>
+        <div id="tabela-wrap" class="tabela-wrap hidden">
+          <h2 class="tabela-titulo">📊 Despesas Capturadas</h2>
+          <div class="tabela-scroll">
+            <table class="tabela" id="tabela-dados">
+              <thead id="tabela-head"></thead>
+              <tbody id="tabela-body"></tbody>
+            </table>
+          </div>
+          <p class="tabela-total" id="tabela-total"></p>
+        </div>
+      </section>
+
+      <!-- Erro -->
+      <section id="s-error" class="card-body hidden">
+        <div class="result-icon icon-err">
+          <svg viewBox="0 0 24 24" fill="none" width="30" height="30">
+            <path d="M6 6l12 12M6 18L18 6" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h1 class="section-title">Ocorreu um erro</h1>
+        <p class="section-desc err-color" id="err-desc"></p>
+        <button class="btn btn-ghost" id="btn-retry">Tentar novamente</button>
+      </section>
+
+    </div>
+    <p class="footer">ExpenseFlow 2.0 &nbsp;·&nbsp; Powered by UiPath RPA</p>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

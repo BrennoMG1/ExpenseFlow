@@ -1,0 +1,473 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Workflows_Processamento_VerificarDuplicata" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:ue="clr-namespace:UiPath.Excel;assembly=UiPath.Excel.Activities" xmlns:ueab="clr-namespace:UiPath.Excel.Activities.Business;assembly=UiPath.Excel.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="UiPathEventConnector" Type="InArgument(x:String)" />
+    <x:Property Name="UiPathEvent" Type="InArgument(x:String)" />
+    <x:Property Name="UiPathEventObjectType" Type="InArgument(x:String)" />
+    <x:Property Name="UiPathEventObjectId" Type="InArgument(x:String)" />
+    <x:Property Name="UiPathAdditionalEventData" Type="InArgument(x:String)" />
+    <x:Property Name="in_Hash" Type="InArgument(x:String)" />
+    <x:Property Name="in_CaminhoArquivo" Type="InArgument(x:String)" />
+    <x:Property Name="out_Duplicata" Type="OutArgument(x:Boolean)" />
+  </x:Members>
+  <this:Workflows_Processamento_VerificarDuplicata.UiPathEventConnector>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Workflows_Processamento_VerificarDuplicata.UiPathEventConnector>
+  <this:Workflows_Processamento_VerificarDuplicata.UiPathEvent>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Workflows_Processamento_VerificarDuplicata.UiPathEvent>
+  <this:Workflows_Processamento_VerificarDuplicata.UiPathEventObjectType>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Workflows_Processamento_VerificarDuplicata.UiPathEventObjectType>
+  <this:Workflows_Processamento_VerificarDuplicata.UiPathEventObjectId>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Workflows_Processamento_VerificarDuplicata.UiPathEventObjectId>
+  <this:Workflows_Processamento_VerificarDuplicata.UiPathAdditionalEventData>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Workflows_Processamento_VerificarDuplicata.UiPathAdditionalEventData>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities.Business</x:String>
+      <x:String>UiPath.Excel.Model</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>Microsoft.Win32.SafeHandles</x:String>
+      <x:String>System.Numerics</x:String>
+      <x:String>System.Net</x:String>
+      <x:String>System.Globalization</x:String>
+      <x:String>System.Configuration.Assemblies</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.CodeDom.Compiler</x:String>
+      <x:String>System.Buffers</x:String>
+      <x:String>System.Buffers.Text</x:String>
+      <x:String>System.Buffers.Binary</x:String>
+      <x:String>System.Threading</x:String>
+      <x:String>System.Threading.Tasks</x:String>
+      <x:String>System.Threading.Tasks.Sources</x:String>
+      <x:String>System.Text</x:String>
+      <x:String>System.Text.Unicode</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>System.Security.Principal</x:String>
+      <x:String>System.Security.Permissions</x:String>
+      <x:String>System.Security.Cryptography</x:String>
+      <x:String>System.Runtime</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Runtime.Remoting</x:String>
+      <x:String>System.Runtime.ExceptionServices</x:String>
+      <x:String>System.Runtime.ConstrainedExecution</x:String>
+      <x:String>System.Runtime.Versioning</x:String>
+      <x:String>System.Runtime.Loader</x:String>
+      <x:String>System.Runtime.Intrinsics</x:String>
+      <x:String>System.Runtime.Intrinsics.Wasm</x:String>
+      <x:String>System.Runtime.Intrinsics.Arm</x:String>
+      <x:String>System.Runtime.Intrinsics.X86</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Runtime.InteropServices.ObjectiveC</x:String>
+      <x:String>System.Runtime.InteropServices.Marshalling</x:String>
+      <x:String>System.Runtime.InteropServices.ComTypes</x:String>
+      <x:String>System.Runtime.CompilerServices</x:String>
+      <x:String>System.Resources</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Reflection.Metadata</x:String>
+      <x:String>System.Reflection.Emit</x:String>
+      <x:String>System.IO.Enumeration</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Diagnostics.SymbolStore</x:String>
+      <x:String>System.Diagnostics.Contracts</x:String>
+      <x:String>System.Diagnostics.CodeAnalysis</x:String>
+      <x:String>System.Diagnostics.Tracing</x:String>
+      <x:String>System.Collections.Concurrent</x:String>
+      <x:String>Internal</x:String>
+      <x:String>System.CodeDom</x:String>
+      <x:String>Microsoft.CSharp</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Linq.Expressions.Interpreter</x:String>
+      <x:String>System.Dynamic</x:String>
+      <x:String>UiPath.Workflow.Runtime</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.Tracking</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Statements.Tracking</x:String>
+      <x:String>System.Activities.Runtime</x:String>
+      <x:String>System.Activities.Runtime.DurableInstancing</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
+      <x:String>System.Activities.ParallelTracking</x:String>
+      <x:String>System.Activities.Hosting</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Persistence</x:String>
+      <x:String>System.Activities.DurableInstancing</x:String>
+      <x:String>System.ComponentModel.Design.Serialization</x:String>
+      <x:String>System.Text.RegularExpressions</x:String>
+      <x:String>System.Security.Authentication.ExtendedProtection</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.Timers</x:String>
+      <x:String>System.ComponentModel.Design</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Schema</x:String>
+      <x:String>System.Xml.Xsl</x:String>
+      <x:String>System.Xml.Xsl.Runtime</x:String>
+      <x:String>System.Xml.XPath</x:String>
+      <x:String>System.Xml.Resolvers</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>Microsoft.VisualBasic.FileIO</x:String>
+      <x:String>System.Security.Authentication</x:String>
+      <x:String>System.Net.Cache</x:String>
+      <x:String>System.Net.NetworkInformation</x:String>
+      <x:String>System.Net.Security</x:String>
+      <x:String>System.Net.Sockets</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.Watcher</AssemblyReference>
+      <AssemblyReference>System.IO.Packaging</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.AccessControl</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
+      <AssemblyReference>System.Security.Cryptography</AssemblyReference>
+      <AssemblyReference>System.Security.Principal.Windows</AssemblyReference>
+      <AssemblyReference>System.IO.MemoryMappedFiles</AssemblyReference>
+      <AssemblyReference>System.Diagnostics.Process</AssemblyReference>
+      <AssemblyReference>Microsoft.Win32.Registry</AssemblyReference>
+      <AssemblyReference>System.IO.Pipes</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+      <AssemblyReference>System.Net.WebClient</AssemblyReference>
+      <AssemblyReference>System.Net.Primitives</AssemblyReference>
+      <AssemblyReference>System.Net.HttpListener</AssemblyReference>
+      <AssemblyReference>System.Net.WebProxy</AssemblyReference>
+      <AssemblyReference>System.Net.NameResolution</AssemblyReference>
+      <AssemblyReference>System.Net.WebHeaderCollection</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Net.Requests</AssemblyReference>
+      <AssemblyReference>System.Net.ServicePoint</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.CodeDom</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Threading.AccessControl</AssemblyReference>
+      <AssemblyReference>System.Threading</AssemblyReference>
+      <AssemblyReference>UiPath.GSuite.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.MicrosoftOffice365.Activities</AssemblyReference>
+      <AssemblyReference>System.Threading.Tasks.Parallel</AssemblyReference>
+      <AssemblyReference>System.Text.Encoding.CodePages</AssemblyReference>
+      <AssemblyReference>System.Text.Encodings.Web</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>System.Security.Claims</AssemblyReference>
+      <AssemblyReference>System.Security.Cryptography.Pkcs</AssemblyReference>
+      <AssemblyReference>System.Security.Cryptography.ProtectedData</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Text.Json</AssemblyReference>
+      <AssemblyReference>System.Windows.Forms.Design</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Runtime.CompilerServices.VisualC</AssemblyReference>
+      <AssemblyReference>System.Windows.Forms</AssemblyReference>
+      <AssemblyReference>System.Resources.Writer</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>Microsoft.PowerShell.Commands.Diagnostics</AssemblyReference>
+      <AssemblyReference>System.Diagnostics.PerformanceCounter</AssemblyReference>
+      <AssemblyReference>System.Diagnostics.TraceSource</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Diagnostics.EventLog</AssemblyReference>
+      <AssemblyReference>System.Diagnostics.DiagnosticSource</AssemblyReference>
+      <AssemblyReference>System.Diagnostics.FileVersionInfo</AssemblyReference>
+      <AssemblyReference>System.Diagnostics.TextWriterTraceListener</AssemblyReference>
+      <AssemblyReference>System.Diagnostics.StackTrace</AssemblyReference>
+      <AssemblyReference>System.Collections.Concurrent</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
+      <AssemblyReference>System.Net.Security</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Private.Xml.Linq</AssemblyReference>
+      <AssemblyReference>System.Xml.XPath.XDocument</AssemblyReference>
+      <AssemblyReference>System.Net.NetworkInformation</AssemblyReference>
+      <AssemblyReference>System.Net.Ping</AssemblyReference>
+      <AssemblyReference>System.Net.Sockets</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>NPOI.Core</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Linq.Async.Queryable</AssemblyReference>
+      <AssemblyReference>System.Linq.Parallel</AssemblyReference>
+      <AssemblyReference>System.Linq.Queryable</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap:VirtualizedContainerService.HintSize="1132,2611" sap2010:WorkflowViewState.IdRef="Sequence_920173">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_Dados">
+        <Variable.Default>
+          <VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="New System.Data.DataTable" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_1" />
+        </Variable.Default>
+      </Variable>
+      <Variable x:TypeArguments="x:String" Name="str_Assunto" />
+      <Variable x:TypeArguments="x:String" Name="str_Corpo" />
+      <Variable x:TypeArguments="x:String" Name="str_Data" />
+      <Variable x:TypeArguments="x:String" Name="str_Descricao" />
+      <Variable x:TypeArguments="x:Decimal" Name="dec_Valor" />
+      <Variable x:TypeArguments="x:String" Name="str_Categoria" />
+      <Variable x:TypeArguments="x:String" Name="str_Hash" />
+      <Variable x:TypeArguments="x:Boolean" Name="bln_Sucesso" />
+      <Variable x:TypeArguments="x:Boolean" Name="bln_Duplicata" />
+      <Variable x:TypeArguments="x:String" Name="str_FormaPagamento" />
+      <Variable x:TypeArguments="x:String" Name="str_ValorBruto" />
+      <Variable x:TypeArguments="x:String" Name="str_DataBruta" />
+      <Variable x:TypeArguments="x:String" Name="str_CorpoLower" />
+      <Variable x:TypeArguments="x:String" Name="in_CorpoEmail" />
+      <Variable x:TypeArguments="x:String" Name="in_AssuntoEmail" />
+      <Variable x:TypeArguments="x:String" Name="out_Data" />
+      <Variable x:TypeArguments="x:String" Name="out_Descricao" />
+      <Variable x:TypeArguments="x:Decimal" Name="out_Valor" />
+      <Variable x:TypeArguments="x:String" Name="out_Categoria" />
+      <Variable x:TypeArguments="x:String" Name="out_FormaPagamento" />
+      <Variable x:TypeArguments="x:String" Name="in_Data" />
+      <Variable x:TypeArguments="x:String" Name="in_Descricao" />
+      <Variable x:TypeArguments="x:Decimal" Name="in_Valor" />
+      <Variable x:TypeArguments="x:String" Name="in_Categoria" />
+      <Variable x:TypeArguments="x:String" Name="in_Origem" />
+      <Variable x:TypeArguments="x:Boolean" Name="out_Sucesso" />
+      <Variable x:TypeArguments="x:String" Name="in_FormaPagamento" />
+      <Variable x:TypeArguments="x:String" Name="UiPathEventConnector" />
+      <Variable x:TypeArguments="x:String" Name="UiPathEvent" />
+      <Variable x:TypeArguments="x:String" Name="UiPathEventObjectType" />
+      <Variable x:TypeArguments="x:String" Name="UiPathEventObjectId" />
+      <Variable x:TypeArguments="x:String" Name="UiPathAdditionalEventData" />
+      <Variable x:TypeArguments="x:String" Name="in_ConnectionId" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:ManualTrigger Result="{x:Null}" DisplayName="Manual Trigger" sap:VirtualizedContainerService.HintSize="558,79" sap2010:WorkflowViewState.IdRef="ManualTrigger_1" />
+    <ui:LogMessage DisplayName="Log - Verificando Hash" sap:VirtualizedContainerService.HintSize="558,179" sap2010:WorkflowViewState.IdRef="LogMessage_4C1BE7">
+      <ui:LogMessage.Level>
+        <InArgument x:TypeArguments="ui:LogLevel">
+          <Literal x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="Literal`1_1" Value="Info" />
+        </InArgument>
+      </ui:LogMessage.Level>
+      <ui:LogMessage.Message>
+        <InArgument x:TypeArguments="x:Object">
+          <VisualBasicValue x:TypeArguments="x:Object" ExpressionText="&quot;[VerificarDuplicata] Verificando hash: &quot; &amp; in_Hash" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_2" />
+        </InArgument>
+      </ui:LogMessage.Message>
+    </ui:LogMessage>
+    <TryCatch DisplayName="Ler Excel e Verificar Duplicata" sap:VirtualizedContainerService.HintSize="558,1393" sap2010:WorkflowViewState.IdRef="TryCatch_2F3533">
+      <TryCatch.Try>
+        <Sequence DisplayName="Tentar" sap:VirtualizedContainerService.HintSize="556,724" sap2010:WorkflowViewState.IdRef="Sequence_920169">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Sequence DisplayName="Leitura do Excel" sap:VirtualizedContainerService.HintSize="522,664" sap2010:WorkflowViewState.IdRef="Sequence_920166">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ueab:ExcelProcessScopeX DisplayAlerts="{x:Null}" ExistingProcessAction="{x:Null}" FileConflictResolution="{x:Null}" LaunchMethod="{x:Null}" LaunchTimeout="{x:Null}" MacroSettings="{x:Null}" ProcessMode="{x:Null}" DisplayName="Excel Process Scope" sap:VirtualizedContainerService.HintSize="488,581" sap2010:WorkflowViewState.IdRef="ExcelProcessScopeX_426453" ShowExcelWindow="False">
+              <ueab:ExcelProcessScopeX.Body>
+                <ActivityAction x:TypeArguments="ui:IExcelProcess">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="ui:IExcelProcess" Name="ExcelProcessScopeTag" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="486,511" sap2010:WorkflowViewState.IdRef="Sequence_920168">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ueab:ExcelApplicationCard ReadFormatting="{x:Null}" SensitivityLabel="{x:Null}" DisplayName="Use Excel File" sap:VirtualizedContainerService.HintSize="452,451" sap2010:WorkflowViewState.IdRef="ExcelApplicationCard_677708" ResizeWindow="None" SensitivityOperation="None">
+                      <ueab:ExcelApplicationCard.Body>
+                        <ActivityAction x:TypeArguments="ue:IWorkbookQuickHandle">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="ue:IWorkbookQuickHandle" Name="Excel" />
+                          </ActivityAction.Argument>
+                          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="450,225" sap2010:WorkflowViewState.IdRef="Sequence_920167">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ueab:ReadRangeX DisplayName="Ler Aba Transações" sap:VirtualizedContainerService.HintSize="416,165" sap2010:WorkflowViewState.IdRef="ReadRangeX_ABA1D6">
+                              <ueab:ReadRangeX.Range>
+                                <InArgument x:TypeArguments="ue:IReadRangeRef">
+                                  <VisualBasicValue x:TypeArguments="ue:IReadRangeRef" ExpressionText="Excel.Sheet(&quot;Transacoes&quot;)" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_6" />
+                                </InArgument>
+                              </ueab:ReadRangeX.Range>
+                              <ueab:ReadRangeX.SaveTo>
+                                <OutArgument x:TypeArguments="sd:DataTable">
+                                  <VisualBasicReference x:TypeArguments="sd:DataTable" ExpressionText="dt_Dados" sap2010:WorkflowViewState.IdRef="VisualBasicReference`1_1" />
+                                </OutArgument>
+                              </ueab:ReadRangeX.SaveTo>
+                            </ueab:ReadRangeX>
+                          </Sequence>
+                        </ActivityAction>
+                      </ueab:ExcelApplicationCard.Body>
+                      <ueab:ExcelApplicationCard.WorkbookPath>
+                        <InArgument x:TypeArguments="x:String">
+                          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_CaminhoArquivo" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_5" />
+                        </InArgument>
+                      </ueab:ExcelApplicationCard.WorkbookPath>
+                    </ueab:ExcelApplicationCard>
+                  </Sequence>
+                </ActivityAction>
+              </ueab:ExcelProcessScopeX.Body>
+            </ueab:ExcelProcessScopeX>
+          </Sequence>
+        </Sequence>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="556,409" sap2010:WorkflowViewState.IdRef="Sequence_920170">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="522,179" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Warn" Message="[&quot;[VerificarDuplicata] Erro ao ler Excel: &quot; &amp; exception.Message &amp; &quot;. Assumindo transacao unica.&quot;]" />
+              <Assign sap:VirtualizedContainerService.HintSize="522,170" sap2010:WorkflowViewState.IdRef="Assign_4">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Boolean">[out_Duplicata]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Boolean">[False]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+      <TryCatch.Finally>
+        <Sequence DisplayName="Finalmente" sap:VirtualizedContainerService.HintSize="556,92" sap2010:WorkflowViewState.IdRef="Sequence_920174">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Sequence>
+      </TryCatch.Finally>
+    </TryCatch>
+    <If DisplayName="Tabela tem dados e coluna Hash?" sap:VirtualizedContainerService.HintSize="558,767" sap2010:WorkflowViewState.IdRef="If_C754AE">
+      <If.Condition>
+        <InArgument x:TypeArguments="x:Boolean">
+          <VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="dt_Dados.Rows.Count &gt; 0 AndAlso dt_Dados.Columns.Contains(&quot;HASH&quot;)" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_3" />
+        </InArgument>
+      </If.Condition>
+      <If.Then>
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="484,313" sap2010:WorkflowViewState.IdRef="Sequence_920171">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Sequence DisplayName="Verificar se Hash já existe" sap:VirtualizedContainerService.HintSize="450,253" sap2010:WorkflowViewState.IdRef="Assign_0F3A5D">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Assign sap:VirtualizedContainerService.HintSize="416,170" sap2010:WorkflowViewState.IdRef="Assign_5">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Boolean">[out_Duplicata]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Boolean">[dt_Dados.AsEnumerable().Any(Function(r) r("HASH").ToString() = in_Hash)]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </Sequence>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="484,313" sap2010:WorkflowViewState.IdRef="Sequence_920172">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Sequence DisplayName="Tabela vazia - Não Duplicado" sap:VirtualizedContainerService.HintSize="450,253" sap2010:WorkflowViewState.IdRef="Assign_BCD4A7">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Assign sap:VirtualizedContainerService.HintSize="416,170" sap2010:WorkflowViewState.IdRef="Assign_6">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Boolean">[out_Duplicata]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Boolean">[False]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </Sequence>
+        </Sequence>
+      </If.Else>
+    </If>
+    <ui:LogMessage DisplayName="Log - Resultado" sap:VirtualizedContainerService.HintSize="558,170" sap2010:WorkflowViewState.IdRef="LogMessage_F4462E">
+      <ui:LogMessage.Level>
+        <InArgument x:TypeArguments="ui:LogLevel">
+          <Literal x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="Literal`1_2" Value="Info" />
+        </InArgument>
+      </ui:LogMessage.Level>
+      <ui:LogMessage.Message>
+        <InArgument x:TypeArguments="x:Object">
+          <VisualBasicValue x:TypeArguments="x:Object" ExpressionText="&quot;[VerificarDuplicata] É duplicata: &quot; &amp; out_Duplicata.ToString()" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_4" />
+        </InArgument>
+      </ui:LogMessage.Message>
+    </ui:LogMessage>
+  </Sequence>
+</Activity>

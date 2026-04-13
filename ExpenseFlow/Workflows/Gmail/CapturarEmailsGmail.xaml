@@ -1,0 +1,930 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Workflows_Gmail_CapturarEmailsGmail" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:uga="clr-namespace:UiPath.GSuite.Activities;assembly=UiPath.GSuite.Activities" xmlns:ugae="clr-namespace:UiPath.GSuite.Activities.Enums;assembly=UiPath.GSuite.Activities" xmlns:ugage="clr-namespace:UiPath.GSuite.Activities.Gmail.Enums;assembly=UiPath.GSuite.Activities" xmlns:ugagm="clr-namespace:UiPath.GSuite.Activities.Gmail.Models;assembly=UiPath.GSuite.Activities" xmlns:ugm="clr-namespace:UiPath.GSuite.Models;assembly=UiPath.GSuite" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:usaa="clr-namespace:UiPath.Shared.Activities.AttachedProperties;assembly=UiPath.GSuite.Activities" xmlns:usau="clr-namespace:UiPath.Shared.Activities.Utils;assembly=UiPath.GSuite.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="UiPathEventConnector" Type="InArgument(x:String)" />
+    <x:Property Name="UiPathEvent" Type="InArgument(x:String)" />
+    <x:Property Name="UiPathEventObjectType" Type="InArgument(x:String)" />
+    <x:Property Name="UiPathEventObjectId" Type="InArgument(x:String)" />
+    <x:Property Name="UiPathAdditionalEventData" Type="InArgument(x:String)" />
+    <x:Property Name="in_CaminhoArquivo" Type="InArgument(x:String)" />
+    <x:Property Name="in_ConnectionId" Type="InArgument(x:String)" />
+  </x:Members>
+  <this:Workflows_Gmail_CapturarEmailsGmail.UiPathEventConnector>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Workflows_Gmail_CapturarEmailsGmail.UiPathEventConnector>
+  <this:Workflows_Gmail_CapturarEmailsGmail.UiPathEvent>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Workflows_Gmail_CapturarEmailsGmail.UiPathEvent>
+  <this:Workflows_Gmail_CapturarEmailsGmail.UiPathEventObjectType>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Workflows_Gmail_CapturarEmailsGmail.UiPathEventObjectType>
+  <this:Workflows_Gmail_CapturarEmailsGmail.UiPathEventObjectId>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Workflows_Gmail_CapturarEmailsGmail.UiPathEventObjectId>
+  <this:Workflows_Gmail_CapturarEmailsGmail.UiPathAdditionalEventData>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Workflows_Gmail_CapturarEmailsGmail.UiPathAdditionalEventData>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.GSuite.Activities</x:String>
+      <x:String>UiPath.GSuite.Models</x:String>
+      <x:String>UiPath.GSuite.Activities.Gmail.Models</x:String>
+      <x:String>UiPath.GSuite.Activities.Gmail.Enums</x:String>
+      <x:String>UiPath.Shared.Activities.Utils</x:String>
+      <x:String>UiPath.Shared.Api.Google.Gmail.Models</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>UiPath.GSuite.Activities.Enums</x:String>
+      <x:String>UiPath.GSuite.Activities.Gmail.Filters</x:String>
+      <x:String>UiPath.GSuite.Gmail.Enums</x:String>
+      <x:String>UiPath.GSuite.Enums</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>Microsoft.Win32.SafeHandles</x:String>
+      <x:String>System.Numerics</x:String>
+      <x:String>System.Net</x:String>
+      <x:String>System.Globalization</x:String>
+      <x:String>System.Configuration.Assemblies</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.CodeDom.Compiler</x:String>
+      <x:String>System.Buffers</x:String>
+      <x:String>System.Buffers.Text</x:String>
+      <x:String>System.Buffers.Binary</x:String>
+      <x:String>System.Threading</x:String>
+      <x:String>System.Threading.Tasks</x:String>
+      <x:String>System.Threading.Tasks.Sources</x:String>
+      <x:String>System.Text</x:String>
+      <x:String>System.Text.Unicode</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>System.Security.Principal</x:String>
+      <x:String>System.Security.Permissions</x:String>
+      <x:String>System.Security.Cryptography</x:String>
+      <x:String>System.Runtime</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Runtime.Remoting</x:String>
+      <x:String>System.Runtime.ExceptionServices</x:String>
+      <x:String>System.Runtime.ConstrainedExecution</x:String>
+      <x:String>System.Runtime.Versioning</x:String>
+      <x:String>System.Runtime.Loader</x:String>
+      <x:String>System.Runtime.Intrinsics</x:String>
+      <x:String>System.Runtime.Intrinsics.Wasm</x:String>
+      <x:String>System.Runtime.Intrinsics.Arm</x:String>
+      <x:String>System.Runtime.Intrinsics.X86</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Runtime.InteropServices.ObjectiveC</x:String>
+      <x:String>System.Runtime.InteropServices.Marshalling</x:String>
+      <x:String>System.Runtime.InteropServices.ComTypes</x:String>
+      <x:String>System.Runtime.CompilerServices</x:String>
+      <x:String>System.Resources</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Reflection.Metadata</x:String>
+      <x:String>System.Reflection.Emit</x:String>
+      <x:String>System.IO.Enumeration</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Diagnostics.SymbolStore</x:String>
+      <x:String>System.Diagnostics.Contracts</x:String>
+      <x:String>System.Diagnostics.CodeAnalysis</x:String>
+      <x:String>System.Diagnostics.Tracing</x:String>
+      <x:String>System.Collections.Concurrent</x:String>
+      <x:String>Internal</x:String>
+      <x:String>System.CodeDom</x:String>
+      <x:String>Microsoft.CSharp</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Linq.Expressions.Interpreter</x:String>
+      <x:String>System.Dynamic</x:String>
+      <x:String>UiPath.Workflow.Runtime</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.Tracking</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Statements.Tracking</x:String>
+      <x:String>System.Activities.Runtime</x:String>
+      <x:String>System.Activities.Runtime.DurableInstancing</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
+      <x:String>System.Activities.ParallelTracking</x:String>
+      <x:String>System.Activities.Hosting</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Persistence</x:String>
+      <x:String>System.Activities.DurableInstancing</x:String>
+      <x:String>System.ComponentModel.Design.Serialization</x:String>
+      <x:String>System.Text.RegularExpressions</x:String>
+      <x:String>System.Security.Authentication.ExtendedProtection</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.Timers</x:String>
+      <x:String>System.ComponentModel.Design</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Schema</x:String>
+      <x:String>System.Xml.Xsl</x:String>
+      <x:String>System.Xml.Xsl.Runtime</x:String>
+      <x:String>System.Xml.XPath</x:String>
+      <x:String>System.Xml.Resolvers</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>Microsoft.VisualBasic.FileIO</x:String>
+      <x:String>System.Security.Authentication</x:String>
+      <x:String>System.Net.Cache</x:String>
+      <x:String>System.Net.NetworkInformation</x:String>
+      <x:String>System.Net.Security</x:String>
+      <x:String>System.Net.Sockets</x:String>
+      <x:String>UiPath.GSuite.Activities.Filters</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.Shared.Activities.ConnectionService.Contracts</x:String>
+      <x:String>UiPath.Shared.Activities.Business</x:String>
+      <x:String>UiPath.GSuite</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>UiPath.GSuite</AssemblyReference>
+      <AssemblyReference>UiPath.GSuite.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.MicrosoftOffice365.Activities</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.Watcher</AssemblyReference>
+      <AssemblyReference>System.IO.Packaging</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.AccessControl</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
+      <AssemblyReference>System.Security.Cryptography</AssemblyReference>
+      <AssemblyReference>System.Security.Principal.Windows</AssemblyReference>
+      <AssemblyReference>System.IO.MemoryMappedFiles</AssemblyReference>
+      <AssemblyReference>System.Diagnostics.Process</AssemblyReference>
+      <AssemblyReference>Microsoft.Win32.Registry</AssemblyReference>
+      <AssemblyReference>System.IO.Pipes</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+      <AssemblyReference>System.Net.WebClient</AssemblyReference>
+      <AssemblyReference>System.Net.Primitives</AssemblyReference>
+      <AssemblyReference>System.Net.HttpListener</AssemblyReference>
+      <AssemblyReference>System.Net.WebProxy</AssemblyReference>
+      <AssemblyReference>System.Net.NameResolution</AssemblyReference>
+      <AssemblyReference>System.Net.WebHeaderCollection</AssemblyReference>
+      <AssemblyReference>System.Net.Requests</AssemblyReference>
+      <AssemblyReference>System.Net.ServicePoint</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.CodeDom</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Threading.AccessControl</AssemblyReference>
+      <AssemblyReference>System.Threading</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.Threading.Tasks.Parallel</AssemblyReference>
+      <AssemblyReference>System.Text.Encoding.CodePages</AssemblyReference>
+      <AssemblyReference>System.Text.Encodings.Web</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>System.Security.Claims</AssemblyReference>
+      <AssemblyReference>System.Security.Cryptography.Pkcs</AssemblyReference>
+      <AssemblyReference>System.Security.Cryptography.ProtectedData</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Text.Json</AssemblyReference>
+      <AssemblyReference>System.Windows.Forms.Design</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Runtime.CompilerServices.VisualC</AssemblyReference>
+      <AssemblyReference>System.Windows.Forms</AssemblyReference>
+      <AssemblyReference>System.Resources.Writer</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>Microsoft.PowerShell.Commands.Diagnostics</AssemblyReference>
+      <AssemblyReference>System.Diagnostics.PerformanceCounter</AssemblyReference>
+      <AssemblyReference>System.Diagnostics.TraceSource</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Diagnostics.EventLog</AssemblyReference>
+      <AssemblyReference>System.Diagnostics.DiagnosticSource</AssemblyReference>
+      <AssemblyReference>System.Diagnostics.FileVersionInfo</AssemblyReference>
+      <AssemblyReference>System.Diagnostics.TextWriterTraceListener</AssemblyReference>
+      <AssemblyReference>System.Diagnostics.StackTrace</AssemblyReference>
+      <AssemblyReference>System.Collections.Concurrent</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
+      <AssemblyReference>System.Net.Security</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Private.Xml.Linq</AssemblyReference>
+      <AssemblyReference>System.Xml.XPath.XDocument</AssemblyReference>
+      <AssemblyReference>System.Net.NetworkInformation</AssemblyReference>
+      <AssemblyReference>System.Net.Ping</AssemblyReference>
+      <AssemblyReference>System.Net.Sockets</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>NPOI.Core</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap:VirtualizedContainerService.HintSize="1132,7153" sap2010:WorkflowViewState.IdRef="Sequence_35">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="str_Assunto" />
+      <Variable x:TypeArguments="x:String" Name="str_Corpo" />
+      <Variable x:TypeArguments="x:String" Name="str_Data" />
+      <Variable x:TypeArguments="x:String" Name="str_Descricao" />
+      <Variable x:TypeArguments="x:Decimal" Name="dec_Valor" />
+      <Variable x:TypeArguments="x:String" Name="str_Categoria" />
+      <Variable x:TypeArguments="x:String" Name="str_Hash" />
+      <Variable x:TypeArguments="x:Boolean" Name="bln_Sucesso" />
+      <Variable x:TypeArguments="x:Boolean" Name="bln_Duplicata" />
+      <Variable x:TypeArguments="x:String" Name="str_FormaPagamento" />
+      <Variable x:TypeArguments="ui:CurrentJobInfo" Name="" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_Dados" />
+      <Variable x:TypeArguments="x:String" Name="str_ValorBruto" />
+      <Variable x:TypeArguments="x:String" Name="str_DataBruta" />
+      <Variable x:TypeArguments="x:String" Name="str_CorpoLower" />
+      <Variable x:TypeArguments="x:String" Name="in_CorpoEmail" />
+      <Variable x:TypeArguments="x:String" Name="in_AssuntoEmail" />
+      <Variable x:TypeArguments="x:String" Name="out_Data" />
+      <Variable x:TypeArguments="x:String" Name="out_Descricao" />
+      <Variable x:TypeArguments="x:Decimal" Name="out_Valor" />
+      <Variable x:TypeArguments="x:String" Name="out_Categoria" />
+      <Variable x:TypeArguments="x:String" Name="out_FormaPagamento" />
+      <Variable x:TypeArguments="x:String" Name="in_Hash" />
+      <Variable x:TypeArguments="x:String" Name="in_Data" />
+      <Variable x:TypeArguments="x:String" Name="in_Descricao" />
+      <Variable x:TypeArguments="x:Decimal" Name="in_Valor" />
+      <Variable x:TypeArguments="x:String" Name="in_Categoria" />
+      <Variable x:TypeArguments="x:String" Name="in_Origem" />
+      <Variable x:TypeArguments="x:Boolean" Name="out_Sucesso" />
+      <Variable x:TypeArguments="x:String" Name="in_FormaPagamento" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:ManualTrigger Result="{x:Null}" DisplayName="Manual Trigger" sap:VirtualizedContainerService.HintSize="696,79" sap2010:WorkflowViewState.IdRef="ManualTrigger_27E9C2" />
+    <ui:LogMessage DisplayName="Log - Iniciando Captura Gmail" sap:VirtualizedContainerService.HintSize="696,179" sap2010:WorkflowViewState.IdRef="LogMessage_421ADF" Message="[&quot;[Gmail] Iniciando captura de e-mails...&quot;]">
+      <ui:LogMessage.Level>
+        <InArgument x:TypeArguments="ui:LogLevel">
+          <Literal x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="Literal`1_1" Value="Info" />
+        </InArgument>
+      </ui:LogMessage.Level>
+    </ui:LogMessage>
+    <If Condition="[String.IsNullOrEmpty(in_ConnectionId) OrElse in_ConnectionId = &quot;6c17c638-c3f3-4d5a-a502-97159e982e30&quot;]" DisplayName="If" sap:VirtualizedContainerService.HintSize="696,3351" sap2010:WorkflowViewState.IdRef="If_0BD733">
+      <If.Then>
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="694,3118" sap2010:WorkflowViewState.IdRef="Sequence_26">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="660,3058" sap2010:WorkflowViewState.IdRef="Sequence_067E5E">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <uga:ForEachEmailConnections BrowserFolder="{x:Reference __ReferenceID1}" BrowserFolderLabelId="{x:Null}" ConnectionAccountName="{x:Null}" CurrentIndex="{x:Null}" Filter="{x:Null}" FolderIdBackup="{x:Reference __ReferenceID0}" Length="{x:Null}" ManualEntryFolder="{x:Null}" QueryFilter="{x:Null}" AllLabels="W3siSWQiOiJDSEFUIiwiTmFtZSI6IkNIQVQiLCJUeXBlIjoic3lzdGVtIn0seyJJZCI6IlNFTlQiLCJOYW1lIjoiU0VOVCIsIlR5cGUiOiJzeXN0ZW0ifSx7IklkIjoiSU5CT1giLCJOYW1lIjoiSU5CT1giLCJUeXBlIjoic3lzdGVtIn0seyJJZCI6IklNUE9SVEFOVCIsIk5hbWUiOiJJTVBPUlRBTlQiLCJUeXBlIjoic3lzdGVtIn0seyJJZCI6IlRSQVNIIiwiTmFtZSI6IlRSQVNIIiwiVHlwZSI6InN5c3RlbSJ9LHsiSWQiOiJEUkFGVCIsIk5hbWUiOiJEUkFGVCIsIlR5cGUiOiJzeXN0ZW0ifSx7IklkIjoiU1BBTSIsIk5hbWUiOiJTUEFNIiwiVHlwZSI6InN5c3RlbSJ9LHsiSWQiOiJDQVRFR09SWV9GT1JVTVMiLCJOYW1lIjoiQ0FURUdPUllfRk9SVU1TIiwiVHlwZSI6InN5c3RlbSJ9LHsiSWQiOiJDQVRFR09SWV9VUERBVEVTIiwiTmFtZSI6IkNBVEVHT1JZX1VQREFURVMiLCJUeXBlIjoic3lzdGVtIn0seyJJZCI6IkNBVEVHT1JZX1BFUlNPTkFMIiwiTmFtZSI6IkNBVEVHT1JZX1BFUlNPTkFMIiwiVHlwZSI6InN5c3RlbSJ9LHsiSWQiOiJDQVRFR09SWV9QUk9NT1RJT05TIiwiTmFtZSI6IkNBVEVHT1JZX1BST01PVElPTlMiLCJUeXBlIjoic3lzdGVtIn0seyJJZCI6IkNBVEVHT1JZX1NPQ0lBTCIsIk5hbWUiOiJDQVRFR09SWV9TT0NJQUwiLCJUeXBlIjoic3lzdGVtIn0seyJJZCI6IlNUQVJSRUQiLCJOYW1lIjoiU1RBUlJFRCIsIlR5cGUiOiJzeXN0ZW0ifSx7IklkIjoiVU5SRUFEIiwiTmFtZSI6IlVOUkVBRCIsIlR5cGUiOiJzeXN0ZW0ifSx7IklkIjoiTGFiZWxfMjA5NDQ3OTI4NzMyNDU3NDUzNCIsIk5hbWUiOiJDdXJzb3MiLCJUeXBlIjoidXNlciJ9LHsiSWQiOiJMYWJlbF81NDU0OTc1MjI5OTk5MzIyMzI3IiwiTmFtZSI6IkVzdMOhZ2lvIiwiVHlwZSI6InVzZXIifSx7IklkIjoiTGFiZWxfNjk4NzIxMjg3NjU1OTA4NDMyNCIsIk5hbWUiOiJKb2dvcyIsIlR5cGUiOiJ1c2VyIn1d" AuthScopesInvalid="False" ConnectionId="6c17c638-c3f3-4d5a-a502-97159e982e30" CurrentItemVariableName="CurrentEmail" DisplayName="Para Cada E-mail Gmail" FilterSelectionMode="ConditionBuilder" FolderInputSelectionMode="Browse" sap:VirtualizedContainerService.HintSize="626,2975" sap2010:WorkflowViewState.IdRef="ForEachEmailConnections_3AC292" UseConnectionService="True">
+              <uga:ForEachEmailConnections.Body>
+                <ActivityAction x:TypeArguments="ugm:GmailMessage, x:Int32">
+                  <ActivityAction.Argument1>
+                    <DelegateInArgument x:TypeArguments="ugm:GmailMessage" Name="CurrentEmail" />
+                  </ActivityAction.Argument1>
+                  <ActivityAction.Argument2>
+                    <DelegateInArgument x:TypeArguments="x:Int32" Name="CurrentEmailIndex" />
+                  </ActivityAction.Argument2>
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="624,2733" sap2010:WorkflowViewState.IdRef="Sequence_25">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:LogMessage DisplayName="Log - E-mail Atual" sap:VirtualizedContainerService.HintSize="590,179" sap2010:WorkflowViewState.IdRef="LogMessage_1E93F8" Message="[&quot;[Gmail] Processando: &quot; &amp; CurrentEmail.Subject]">
+                      <ui:LogMessage.Level>
+                        <InArgument x:TypeArguments="ui:LogLevel">
+                          <Literal x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="Literal`1_19" Value="Info" />
+                        </InArgument>
+                      </ui:LogMessage.Level>
+                    </ui:LogMessage>
+                    <Sequence DisplayName="Capturar Assunto do E-mail" sap:VirtualizedContainerService.HintSize="590,262" sap2010:WorkflowViewState.IdRef="Assign_619696">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <Assign sap:VirtualizedContainerService.HintSize="416,170" sap2010:WorkflowViewState.IdRef="Assign_619697">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[str_Assunto]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">[If(CurrentEmail.Subject IsNot Nothing, CurrentEmail.Subject.ToString(), "")]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                    </Sequence>
+                    <Sequence DisplayName="Capturar Corpo do E-mail" sap:VirtualizedContainerService.HintSize="590,262" sap2010:WorkflowViewState.IdRef="Assign_DB12B9">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <Assign sap:VirtualizedContainerService.HintSize="416,170" sap2010:WorkflowViewState.IdRef="Assign_619698">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[str_Corpo]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">[If(CurrentEmail.Body IsNot Nothing, CurrentEmail.Body.ToString(), "")]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                    </Sequence>
+                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Extrair Dados da Transação" sap:VirtualizedContainerService.HintSize="590,180" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_AB9C11" UnSafe="False">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <InArgument x:TypeArguments="x:String" x:Key="UiPathEventConnector">[UiPathEventConnector]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="UiPathEvent">[UiPathEvent]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="UiPathEventObjectType">[UiPathEventObjectType]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="UiPathEventObjectId">[UiPathEventObjectId]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="UiPathAdditionalEventData">[UiPathAdditionalEventData]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_CorpoEmail">[str_Corpo]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_AssuntoEmail">[str_Assunto]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_Origem">Gmail</InArgument>
+                        <OutArgument x:TypeArguments="x:String" x:Key="out_Data">[str_Data]</OutArgument>
+                        <OutArgument x:TypeArguments="x:String" x:Key="out_Descricao">[str_Descricao]</OutArgument>
+                        <OutArgument x:TypeArguments="x:Decimal" x:Key="out_Valor">[dec_Valor]</OutArgument>
+                        <OutArgument x:TypeArguments="x:String" x:Key="out_Categoria">[str_Categoria]</OutArgument>
+                        <OutArgument x:TypeArguments="x:Boolean" x:Key="out_Sucesso">[bln_Sucesso]</OutArgument>
+                        <OutArgument x:TypeArguments="x:String" x:Key="out_FormaPagamento">[str_FormaPagamento]</OutArgument>
+                      </ui:InvokeWorkflowFile.Arguments>
+                      <ui:InvokeWorkflowFile.WorkflowFileName>
+                        <InArgument x:TypeArguments="x:String">
+                          <Literal x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="Literal`1_20">Workflows\Processamento\ExtrairDadosTransacao.xaml</Literal>
+                        </InArgument>
+                      </ui:InvokeWorkflowFile.WorkflowFileName>
+                    </ui:InvokeWorkflowFile>
+                    <If Condition="[bln_Sucesso = True]" DisplayName="Dados Extraídos com Sucesso?" sap:VirtualizedContainerService.HintSize="590,1790" sap2010:WorkflowViewState.IdRef="If_4BC133">
+                      <If.Then>
+                        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="588,1345" sap2010:WorkflowViewState.IdRef="Sequence_23">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="554,1285" sap2010:WorkflowViewState.IdRef="Sequence_2978C9">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <Sequence DisplayName="Pipeline de Integridade - Hash e Deduplicação" sap:VirtualizedContainerService.HintSize="520,1202" sap2010:WorkflowViewState.IdRef="Sequence_5BC3C0">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Gerar Hash SHA256" sap:VirtualizedContainerService.HintSize="486,180" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_B4F694" UnSafe="False">
+                                <ui:InvokeWorkflowFile.Arguments>
+                                  <InArgument x:TypeArguments="x:String" x:Key="in_Data">[str_Data]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="in_Descricao">[str_Descricao]</InArgument>
+                                  <InArgument x:TypeArguments="x:Decimal" x:Key="in_Valor">[dec_Valor]</InArgument>
+                                  <OutArgument x:TypeArguments="x:String" x:Key="out_Hash">[str_Hash]</OutArgument>
+                                </ui:InvokeWorkflowFile.Arguments>
+                                <ui:InvokeWorkflowFile.WorkflowFileName>
+                                  <InArgument x:TypeArguments="x:String">
+                                    <Literal x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="Literal`1_25">Workflows\Processamento\GerarHash.xaml</Literal>
+                                  </InArgument>
+                                </ui:InvokeWorkflowFile.WorkflowFileName>
+                              </ui:InvokeWorkflowFile>
+                              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Verificar Duplicata" sap:VirtualizedContainerService.HintSize="486,180" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_030F3F" UnSafe="False">
+                                <ui:InvokeWorkflowFile.Arguments>
+                                  <InArgument x:TypeArguments="x:String" x:Key="UiPathEventConnector">[UiPathEventConnector]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="UiPathEvent">[UiPathEvent]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="UiPathEventObjectType">[UiPathEventObjectType]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="UiPathEventObjectId">[UiPathEventObjectId]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="UiPathAdditionalEventData">[UiPathAdditionalEventData]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="in_Hash">[str_Hash]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="in_CaminhoArquivo">[in_CaminhoArquivo]</InArgument>
+                                  <OutArgument x:TypeArguments="x:Boolean" x:Key="out_Duplicata">[bln_Duplicata]</OutArgument>
+                                </ui:InvokeWorkflowFile.Arguments>
+                                <ui:InvokeWorkflowFile.WorkflowFileName>
+                                  <InArgument x:TypeArguments="x:String">
+                                    <Literal x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="Literal`1_26">Workflows\Processamento\VerificarDuplicata.xaml</Literal>
+                                  </InArgument>
+                                </ui:InvokeWorkflowFile.WorkflowFileName>
+                              </ui:InvokeWorkflowFile>
+                              <If Condition="[Not bln_Duplicata]" DisplayName="Transação Nova (não duplicada)?" sap:VirtualizedContainerService.HintSize="486,759" sap2010:WorkflowViewState.IdRef="If_60C853">
+                                <If.Then>
+                                  <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="484,314" sap2010:WorkflowViewState.IdRef="Sequence_21">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="450,254" sap2010:WorkflowViewState.IdRef="Sequence_ADAC26">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Salvar Transação no Excel" sap:VirtualizedContainerService.HintSize="416,171" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_ADE366" UnSafe="False">
+                                        <ui:InvokeWorkflowFile.Arguments>
+                                          <InArgument x:TypeArguments="x:String" x:Key="UiPathEventConnector">[UiPathEventConnector]</InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="UiPathEvent">[UiPathEvent]</InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="UiPathEventObjectType">[UiPathEventObjectType]</InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="UiPathEventObjectId">[UiPathEventObjectId]</InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="UiPathAdditionalEventData">[UiPathAdditionalEventData]</InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="in_Hash">[str_Hash]</InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="in_Data">[str_Data]</InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="in_Descricao">[str_Descricao]</InArgument>
+                                          <InArgument x:TypeArguments="x:Decimal" x:Key="in_Valor">[dec_Valor]</InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="in_Categoria">[str_Categoria]</InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="in_Origem">Gmail</InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="in_CaminhoArquivo">[in_CaminhoArquivo]</InArgument>
+                                          <OutArgument x:TypeArguments="x:Boolean" x:Key="out_Sucesso">[bln_Sucesso]</OutArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="in_FormaPagamento">[str_FormaPagamento]</InArgument>
+                                        </ui:InvokeWorkflowFile.Arguments>
+                                        <ui:InvokeWorkflowFile.WorkflowFileName>
+                                          <InArgument x:TypeArguments="x:String">
+                                            <Literal x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="Literal`1_29">Workflows\Processamento\EnviarParaAPI.xaml</Literal>
+                                          </InArgument>
+                                        </ui:InvokeWorkflowFile.WorkflowFileName>
+                                      </ui:InvokeWorkflowFile>
+                                    </Sequence>
+                                  </Sequence>
+                                </If.Then>
+                                <If.Else>
+                                  <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="484,313" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="450,253" sap2010:WorkflowViewState.IdRef="Sequence_06AD9E">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <ui:LogMessage DisplayName="Log - Duplicata Ignorada" sap:VirtualizedContainerService.HintSize="416,170" sap2010:WorkflowViewState.IdRef="LogMessage_53037F" Message="[&quot;[Gmail] Duplicata ignorada: &quot; &amp; str_Hash]">
+                                        <ui:LogMessage.Level>
+                                          <InArgument x:TypeArguments="ui:LogLevel">
+                                            <Literal x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="Literal`1_30" Value="Warn" />
+                                          </InArgument>
+                                        </ui:LogMessage.Level>
+                                      </ui:LogMessage>
+                                    </Sequence>
+                                  </Sequence>
+                                </If.Else>
+                              </If>
+                            </Sequence>
+                          </Sequence>
+                        </Sequence>
+                      </If.Then>
+                      <If.Else>
+                        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="588,313" sap2010:WorkflowViewState.IdRef="Sequence_24">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="554,253" sap2010:WorkflowViewState.IdRef="Sequence_ADA141">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:LogMessage DisplayName="Log - Sem Dados Financeiros" sap:VirtualizedContainerService.HintSize="416,170" sap2010:WorkflowViewState.IdRef="LogMessage_8270C4" Message="[&quot;[Gmail] E-mail sem dados financeiros: &quot; &amp; str_Assunto]">
+                              <ui:LogMessage.Level>
+                                <InArgument x:TypeArguments="ui:LogLevel">
+                                  <Literal x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="Literal`1_23" Value="Info" />
+                                </InArgument>
+                              </ui:LogMessage.Level>
+                            </ui:LogMessage>
+                          </Sequence>
+                        </Sequence>
+                      </If.Else>
+                    </If>
+                  </Sequence>
+                </ActivityAction>
+              </uga:ForEachEmailConnections.Body>
+              <usaa:AutopilotCustomInit.CustomInit>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <InArgument x:TypeArguments="x:String" x:Key="BrowserFolder">Inbox</InArgument>
+                </scg:Dictionary>
+              </usaa:AutopilotCustomInit.CustomInit>
+              <uga:ForEachEmailConnections.FilterSelectionBackup>
+                <usau:BackupSlot x:TypeArguments="ugae:FilterMode" StoredValue="ConditionBuilder">
+                  <usau:BackupSlot.BackupValues>
+                    <scg:Dictionary x:TypeArguments="ugae:FilterMode, scg:List(x:Object)" />
+                  </usau:BackupSlot.BackupValues>
+                </usau:BackupSlot>
+              </uga:ForEachEmailConnections.FilterSelectionBackup>
+              <uga:ForEachEmailConnections.Folder>
+                <ugagm:FolderArgument BrowserFolderId="{x:Null}" ConnectionDescriptor="{x:Null}" ManualEntryFolderName="{x:Null}" ConnectionKey="6c17c638-c3f3-4d5a-a502-97159e982e30" InputMode="Browse">
+                  <ugagm:FolderArgument.Backup>
+                    <usau:BackupSlot x:TypeArguments="ugage:FolderInputMode" x:Name="__ReferenceID0" StoredValue="Browse">
+                      <usau:BackupSlot.BackupValues>
+                        <scg:Dictionary x:TypeArguments="ugage:FolderInputMode, scg:List(x:Object)" />
+                      </usau:BackupSlot.BackupValues>
+                    </usau:BackupSlot>
+                  </ugagm:FolderArgument.Backup>
+                  <ugagm:FolderArgument.BrowserFolderName>
+                    <InArgument x:TypeArguments="x:String" x:Name="__ReferenceID1">
+                      <Literal x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="Literal`1_10">Inbox</Literal>
+                    </InArgument>
+                  </ugagm:FolderArgument.BrowserFolderName>
+                </ugagm:FolderArgument>
+              </uga:ForEachEmailConnections.Folder>
+              <uga:ForEachEmailConnections.ImportantOnly>
+                <InArgument x:TypeArguments="x:Boolean">
+                  <Literal x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="Literal`1_7" />
+                </InArgument>
+              </uga:ForEachEmailConnections.ImportantOnly>
+              <uga:ForEachEmailConnections.IncludeSubfolders>
+                <InArgument x:TypeArguments="x:Boolean">
+                  <Literal x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="Literal`1_3" />
+                </InArgument>
+              </uga:ForEachEmailConnections.IncludeSubfolders>
+              <uga:ForEachEmailConnections.MarkAsRead>
+                <InArgument x:TypeArguments="x:Boolean">
+                  <Literal x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="Literal`1_9" />
+                </InArgument>
+              </uga:ForEachEmailConnections.MarkAsRead>
+              <uga:ForEachEmailConnections.MaxResults>
+                <InArgument x:TypeArguments="x:Int32">
+                  <Literal x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="Literal`1_4" Value="300" />
+                </InArgument>
+              </uga:ForEachEmailConnections.MaxResults>
+              <uga:ForEachEmailConnections.StarredOnly>
+                <InArgument x:TypeArguments="x:Boolean">
+                  <Literal x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="Literal`1_8" />
+                </InArgument>
+              </uga:ForEachEmailConnections.StarredOnly>
+              <uga:ForEachEmailConnections.UnreadOnly>
+                <InArgument x:TypeArguments="x:Boolean">
+                  <Literal x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="Literal`1_5" />
+                </InArgument>
+              </uga:ForEachEmailConnections.UnreadOnly>
+              <uga:ForEachEmailConnections.WithAttachmentsOnly>
+                <InArgument x:TypeArguments="x:Boolean">
+                  <Literal x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="Literal`1_6" />
+                </InArgument>
+              </uga:ForEachEmailConnections.WithAttachmentsOnly>
+            </uga:ForEachEmailConnections>
+          </Sequence>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="694,92" sap2010:WorkflowViewState.IdRef="Sequence_27">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Sequence>
+      </If.Else>
+    </If>
+    <If Condition="[String.IsNullOrEmpty(in_ConnectionId) OrElse in_ConnectionId = &quot;149c485e-5752-4a75-854c-555a253fac09&quot;]" DisplayName="If" sap:VirtualizedContainerService.HintSize="696,3351" sap2010:WorkflowViewState.IdRef="If_0C2F5D">
+      <If.Then>
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="694,3118" sap2010:WorkflowViewState.IdRef="Sequence_33">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="660,3058" sap2010:WorkflowViewState.IdRef="Sequence_F7B6C2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <uga:ForEachEmailConnections BrowserFolder="{x:Reference __ReferenceID3}" ConnectionAccountName="{x:Null}" CurrentIndex="{x:Null}" Filter="{x:Null}" FolderIdBackup="{x:Reference __ReferenceID2}" Length="{x:Null}" ManualEntryFolder="{x:Null}" QueryFilter="{x:Null}" AllLabels="W3siSWQiOiJDSEFUIiwiTmFtZSI6IkNIQVQiLCJUeXBlIjoic3lzdGVtIn0seyJJZCI6IlNFTlQiLCJOYW1lIjoiU0VOVCIsIlR5cGUiOiJzeXN0ZW0ifSx7IklkIjoiSU5CT1giLCJOYW1lIjoiSU5CT1giLCJUeXBlIjoic3lzdGVtIn0seyJJZCI6IklNUE9SVEFOVCIsIk5hbWUiOiJJTVBPUlRBTlQiLCJUeXBlIjoic3lzdGVtIn0seyJJZCI6IlRSQVNIIiwiTmFtZSI6IlRSQVNIIiwiVHlwZSI6InN5c3RlbSJ9LHsiSWQiOiJEUkFGVCIsIk5hbWUiOiJEUkFGVCIsIlR5cGUiOiJzeXN0ZW0ifSx7IklkIjoiU1BBTSIsIk5hbWUiOiJTUEFNIiwiVHlwZSI6InN5c3RlbSJ9LHsiSWQiOiJDQVRFR09SWV9GT1JVTVMiLCJOYW1lIjoiQ0FURUdPUllfRk9SVU1TIiwiVHlwZSI6InN5c3RlbSJ9LHsiSWQiOiJDQVRFR09SWV9VUERBVEVTIiwiTmFtZSI6IkNBVEVHT1JZX1VQREFURVMiLCJUeXBlIjoic3lzdGVtIn0seyJJZCI6IkNBVEVHT1JZX1BFUlNPTkFMIiwiTmFtZSI6IkNBVEVHT1JZX1BFUlNPTkFMIiwiVHlwZSI6InN5c3RlbSJ9LHsiSWQiOiJDQVRFR09SWV9QUk9NT1RJT05TIiwiTmFtZSI6IkNBVEVHT1JZX1BST01PVElPTlMiLCJUeXBlIjoic3lzdGVtIn0seyJJZCI6IkNBVEVHT1JZX1NPQ0lBTCIsIk5hbWUiOiJDQVRFR09SWV9TT0NJQUwiLCJUeXBlIjoic3lzdGVtIn0seyJJZCI6IllFTExPV19TVEFSIiwiTmFtZSI6IllFTExPV19TVEFSIiwiVHlwZSI6InN5c3RlbSJ9LHsiSWQiOiJTVEFSUkVEIiwiTmFtZSI6IlNUQVJSRUQiLCJUeXBlIjoic3lzdGVtIn0seyJJZCI6IlVOUkVBRCIsIk5hbWUiOiJVTlJFQUQiLCJUeXBlIjoic3lzdGVtIn0seyJJZCI6IkxhYmVsXzExNjY3MTkxMDY4ODE5MzIzNjMiLCJOYW1lIjoiSm9nb3MiLCJUeXBlIjoidXNlciJ9LHsiSWQiOiJMYWJlbF8xNzk4NTcwMDgyMjY3MjkyMzk2IiwiTmFtZSI6IkN1cnNvcyIsIlR5cGUiOiJ1c2VyIn0seyJJZCI6IkxhYmVsXzIxNzQwNDA1MDY2NDI0NDk1ODAiLCJOYW1lIjoiRk1VIiwiVHlwZSI6InVzZXIifSx7IklkIjoiTGFiZWxfMjczNDYyOTg4Njg2NzM5MTE2MiIsIk5hbWUiOiJBbGltZW50YcOnw6NvIGUgVHJlaW5vIiwiVHlwZSI6InVzZXIifSx7IklkIjoiTGFiZWxfMzE4MjY2OTc4NDc3Nzg2NTMyNiIsIk5hbWUiOiJWYWdhcyAoRW1wcmVnbykiLCJUeXBlIjoidXNlciJ9LHsiSWQiOiJMYWJlbF8zOTM4ODIxNzA3OTcyMjkzMTgwIiwiTmFtZSI6IkNvbnRhcyIsIlR5cGUiOiJ1c2VyIn0seyJJZCI6IkxhYmVsXzM5NjcwNzgxNzM3MTE0MTYxMDEiLCJOYW1lIjoiQmFieVwvUGV0cyIsIlR5cGUiOiJ1c2VyIn0seyJJZCI6IkxhYmVsXzYxMzM1MzA1OTAzOTA5MjIzMTMiLCJOYW1lIjoiQmF0YWggVGVjaWRvcyIsIlR5cGUiOiJ1c2VyIn0seyJJZCI6IkxhYmVsXzk1MjA3ODY2MTM1OTkyMzc2OCIsIk5hbWUiOiJBc3NpbmF0dXJhc1wvQ29tcHJhcyIsIlR5cGUiOiJ1c2VyIn1d" AuthScopesInvalid="False" BrowserFolderLabelId="INBOX" ConnectionId="149c485e-5752-4a75-854c-555a253fac09" CurrentItemVariableName="CurrentEmail" DisplayName="Para Cada E-mail Gmail" FilterSelectionMode="ConditionBuilder" FolderInputSelectionMode="Browse" sap:VirtualizedContainerService.HintSize="626,2975" sap2010:WorkflowViewState.IdRef="ForEachEmailConnections_53FD5C" UseConnectionService="True">
+              <uga:ForEachEmailConnections.Body>
+                <ActivityAction x:TypeArguments="ugm:GmailMessage, x:Int32">
+                  <ActivityAction.Argument1>
+                    <DelegateInArgument x:TypeArguments="ugm:GmailMessage" Name="CurrentEmail" />
+                  </ActivityAction.Argument1>
+                  <ActivityAction.Argument2>
+                    <DelegateInArgument x:TypeArguments="x:Int32" Name="CurrentEmailIndex" />
+                  </ActivityAction.Argument2>
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="624,2733" sap2010:WorkflowViewState.IdRef="Sequence_32">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:LogMessage DisplayName="Log - E-mail Atual" sap:VirtualizedContainerService.HintSize="590,179" sap2010:WorkflowViewState.IdRef="LogMessage_756935" Message="[&quot;[Gmail] Processando: &quot; &amp; CurrentEmail.Subject]">
+                      <ui:LogMessage.Level>
+                        <InArgument x:TypeArguments="ui:LogLevel">
+                          <Literal x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="Literal`1_21" Value="Info" />
+                        </InArgument>
+                      </ui:LogMessage.Level>
+                    </ui:LogMessage>
+                    <Sequence DisplayName="Capturar Assunto do E-mail" sap:VirtualizedContainerService.HintSize="590,262" sap2010:WorkflowViewState.IdRef="Assign_DEC411">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <Assign sap:VirtualizedContainerService.HintSize="416,170" sap2010:WorkflowViewState.IdRef="Assign_619699">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[str_Assunto]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">[If(CurrentEmail.Subject IsNot Nothing, CurrentEmail.Subject.ToString(), "")]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                    </Sequence>
+                    <Sequence DisplayName="Capturar Corpo do E-mail" sap:VirtualizedContainerService.HintSize="590,262" sap2010:WorkflowViewState.IdRef="Assign_EAD1A8">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <Assign sap:VirtualizedContainerService.HintSize="416,170" sap2010:WorkflowViewState.IdRef="Assign_619700">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="x:String">[str_Corpo]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="x:String">[If(CurrentEmail.Body IsNot Nothing, CurrentEmail.Body.ToString(), "")]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                    </Sequence>
+                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Extrair Dados da Transação" sap:VirtualizedContainerService.HintSize="590,180" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4474C3" UnSafe="False">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <InArgument x:TypeArguments="x:String" x:Key="UiPathEventConnector">[UiPathEventConnector]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="UiPathEvent">[UiPathEvent]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="UiPathEventObjectType">[UiPathEventObjectType]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="UiPathEventObjectId">[UiPathEventObjectId]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="UiPathAdditionalEventData">[UiPathAdditionalEventData]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_CorpoEmail">[str_Corpo]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_AssuntoEmail">[str_Assunto]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_Origem">Gmail</InArgument>
+                        <OutArgument x:TypeArguments="x:String" x:Key="out_Data">[str_Data]</OutArgument>
+                        <OutArgument x:TypeArguments="x:String" x:Key="out_Descricao">[str_Descricao]</OutArgument>
+                        <OutArgument x:TypeArguments="x:Decimal" x:Key="out_Valor">[dec_Valor]</OutArgument>
+                        <OutArgument x:TypeArguments="x:String" x:Key="out_Categoria">[str_Categoria]</OutArgument>
+                        <OutArgument x:TypeArguments="x:Boolean" x:Key="out_Sucesso">[bln_Sucesso]</OutArgument>
+                        <OutArgument x:TypeArguments="x:String" x:Key="out_FormaPagamento">[str_FormaPagamento]</OutArgument>
+                      </ui:InvokeWorkflowFile.Arguments>
+                      <ui:InvokeWorkflowFile.WorkflowFileName>
+                        <InArgument x:TypeArguments="x:String">
+                          <Literal x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="Literal`1_22">Workflows\Processamento\ExtrairDadosTransacao.xaml</Literal>
+                        </InArgument>
+                      </ui:InvokeWorkflowFile.WorkflowFileName>
+                    </ui:InvokeWorkflowFile>
+                    <If Condition="[bln_Sucesso = True]" DisplayName="Dados Extraídos com Sucesso?" sap:VirtualizedContainerService.HintSize="590,1790" sap2010:WorkflowViewState.IdRef="If_EC4757">
+                      <If.Then>
+                        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="588,1345" sap2010:WorkflowViewState.IdRef="Sequence_30">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="554,1285" sap2010:WorkflowViewState.IdRef="Sequence_7E7EF9">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <Sequence DisplayName="Pipeline de Integridade - Hash e Deduplicação" sap:VirtualizedContainerService.HintSize="520,1202" sap2010:WorkflowViewState.IdRef="Sequence_DB499C">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Gerar Hash SHA256" sap:VirtualizedContainerService.HintSize="486,180" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6605A3" UnSafe="False">
+                                <ui:InvokeWorkflowFile.Arguments>
+                                  <InArgument x:TypeArguments="x:String" x:Key="in_Data">[str_Data]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="in_Descricao">[str_Descricao]</InArgument>
+                                  <InArgument x:TypeArguments="x:Decimal" x:Key="in_Valor">[dec_Valor]</InArgument>
+                                  <OutArgument x:TypeArguments="x:String" x:Key="out_Hash">[str_Hash]</OutArgument>
+                                </ui:InvokeWorkflowFile.Arguments>
+                                <ui:InvokeWorkflowFile.WorkflowFileName>
+                                  <InArgument x:TypeArguments="x:String">
+                                    <Literal x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="Literal`1_27">Workflows\Processamento\GerarHash.xaml</Literal>
+                                  </InArgument>
+                                </ui:InvokeWorkflowFile.WorkflowFileName>
+                              </ui:InvokeWorkflowFile>
+                              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Verificar Duplicata" sap:VirtualizedContainerService.HintSize="486,180" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9EB97D" UnSafe="False">
+                                <ui:InvokeWorkflowFile.Arguments>
+                                  <InArgument x:TypeArguments="x:String" x:Key="UiPathEventConnector">[UiPathEventConnector]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="UiPathEvent">[UiPathEvent]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="UiPathEventObjectType">[UiPathEventObjectType]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="UiPathEventObjectId">[UiPathEventObjectId]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="UiPathAdditionalEventData">[UiPathAdditionalEventData]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="in_Hash">[str_Hash]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="in_CaminhoArquivo">[in_CaminhoArquivo]</InArgument>
+                                  <OutArgument x:TypeArguments="x:Boolean" x:Key="out_Duplicata">[bln_Duplicata]</OutArgument>
+                                </ui:InvokeWorkflowFile.Arguments>
+                                <ui:InvokeWorkflowFile.WorkflowFileName>
+                                  <InArgument x:TypeArguments="x:String">
+                                    <Literal x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="Literal`1_28">Workflows\Processamento\VerificarDuplicata.xaml</Literal>
+                                  </InArgument>
+                                </ui:InvokeWorkflowFile.WorkflowFileName>
+                              </ui:InvokeWorkflowFile>
+                              <If Condition="[Not bln_Duplicata]" DisplayName="Transação Nova (não duplicada)?" sap:VirtualizedContainerService.HintSize="486,759" sap2010:WorkflowViewState.IdRef="If_9FAC8E">
+                                <If.Then>
+                                  <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="484,314" sap2010:WorkflowViewState.IdRef="Sequence_28">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="450,254" sap2010:WorkflowViewState.IdRef="Sequence_C8BEF7">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Salvar Transação no Excel" sap:VirtualizedContainerService.HintSize="416,171" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_72595B" UnSafe="False">
+                                        <ui:InvokeWorkflowFile.Arguments>
+                                          <InArgument x:TypeArguments="x:String" x:Key="UiPathEventConnector">[UiPathEventConnector]</InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="UiPathEvent">[UiPathEvent]</InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="UiPathEventObjectType">[UiPathEventObjectType]</InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="UiPathEventObjectId">[UiPathEventObjectId]</InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="UiPathAdditionalEventData">[UiPathAdditionalEventData]</InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="in_Hash">[str_Hash]</InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="in_Data">[str_Data]</InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="in_Descricao">[str_Descricao]</InArgument>
+                                          <InArgument x:TypeArguments="x:Decimal" x:Key="in_Valor">[dec_Valor]</InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="in_Categoria">[str_Categoria]</InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="in_Origem">Gmail</InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="in_CaminhoArquivo">[in_CaminhoArquivo]</InArgument>
+                                          <OutArgument x:TypeArguments="x:Boolean" x:Key="out_Sucesso">[bln_Sucesso]</OutArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="in_FormaPagamento">[str_FormaPagamento]</InArgument>
+                                        </ui:InvokeWorkflowFile.Arguments>
+                                        <ui:InvokeWorkflowFile.WorkflowFileName>
+                                          <InArgument x:TypeArguments="x:String">
+                                            <Literal x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="Literal`1_31">Workflows\Processamento\EnviarParaAPI.xaml</Literal>
+                                          </InArgument>
+                                        </ui:InvokeWorkflowFile.WorkflowFileName>
+                                      </ui:InvokeWorkflowFile>
+                                    </Sequence>
+                                  </Sequence>
+                                </If.Then>
+                                <If.Else>
+                                  <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="484,313" sap2010:WorkflowViewState.IdRef="Sequence_29">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="450,253" sap2010:WorkflowViewState.IdRef="Sequence_6FD07D">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <ui:LogMessage DisplayName="Log - Duplicata Ignorada" sap:VirtualizedContainerService.HintSize="416,170" sap2010:WorkflowViewState.IdRef="LogMessage_166B79" Message="[&quot;[Gmail] Duplicata ignorada: &quot; &amp; str_Hash]">
+                                        <ui:LogMessage.Level>
+                                          <InArgument x:TypeArguments="ui:LogLevel">
+                                            <Literal x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="Literal`1_32" Value="Warn" />
+                                          </InArgument>
+                                        </ui:LogMessage.Level>
+                                      </ui:LogMessage>
+                                    </Sequence>
+                                  </Sequence>
+                                </If.Else>
+                              </If>
+                            </Sequence>
+                          </Sequence>
+                        </Sequence>
+                      </If.Then>
+                      <If.Else>
+                        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="588,313" sap2010:WorkflowViewState.IdRef="Sequence_31">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="554,253" sap2010:WorkflowViewState.IdRef="Sequence_A1E8EE">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:LogMessage DisplayName="Log - Sem Dados Financeiros" sap:VirtualizedContainerService.HintSize="416,170" sap2010:WorkflowViewState.IdRef="LogMessage_2842C0" Message="[&quot;[Gmail] E-mail sem dados financeiros: &quot; &amp; str_Assunto]">
+                              <ui:LogMessage.Level>
+                                <InArgument x:TypeArguments="ui:LogLevel">
+                                  <Literal x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="Literal`1_24" Value="Info" />
+                                </InArgument>
+                              </ui:LogMessage.Level>
+                            </ui:LogMessage>
+                          </Sequence>
+                        </Sequence>
+                      </If.Else>
+                    </If>
+                  </Sequence>
+                </ActivityAction>
+              </uga:ForEachEmailConnections.Body>
+              <usaa:AutopilotCustomInit.CustomInit>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <InArgument x:TypeArguments="x:String" x:Key="BrowserFolder">Inbox</InArgument>
+                </scg:Dictionary>
+              </usaa:AutopilotCustomInit.CustomInit>
+              <uga:ForEachEmailConnections.FilterSelectionBackup>
+                <usau:BackupSlot x:TypeArguments="ugae:FilterMode" StoredValue="ConditionBuilder">
+                  <usau:BackupSlot.BackupValues>
+                    <scg:Dictionary x:TypeArguments="ugae:FilterMode, scg:List(x:Object)" />
+                  </usau:BackupSlot.BackupValues>
+                </usau:BackupSlot>
+              </uga:ForEachEmailConnections.FilterSelectionBackup>
+              <uga:ForEachEmailConnections.Folder>
+                <ugagm:FolderArgument ConnectionDescriptor="{x:Null}" ManualEntryFolderName="{x:Null}" BrowserFolderId="INBOX" ConnectionKey="149c485e-5752-4a75-854c-555a253fac09" InputMode="Browse">
+                  <ugagm:FolderArgument.Backup>
+                    <usau:BackupSlot x:TypeArguments="ugage:FolderInputMode" x:Name="__ReferenceID2" StoredValue="Browse">
+                      <usau:BackupSlot.BackupValues>
+                        <scg:Dictionary x:TypeArguments="ugage:FolderInputMode, scg:List(x:Object)" />
+                      </usau:BackupSlot.BackupValues>
+                    </usau:BackupSlot>
+                  </ugagm:FolderArgument.Backup>
+                  <ugagm:FolderArgument.BrowserFolderName>
+                    <InArgument x:TypeArguments="x:String" x:Name="__ReferenceID3">
+                      <Literal x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="Literal`1_18">Inbox</Literal>
+                    </InArgument>
+                  </ugagm:FolderArgument.BrowserFolderName>
+                </ugagm:FolderArgument>
+              </uga:ForEachEmailConnections.Folder>
+              <uga:ForEachEmailConnections.ImportantOnly>
+                <InArgument x:TypeArguments="x:Boolean">
+                  <Literal x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="Literal`1_15" />
+                </InArgument>
+              </uga:ForEachEmailConnections.ImportantOnly>
+              <uga:ForEachEmailConnections.IncludeSubfolders>
+                <InArgument x:TypeArguments="x:Boolean">
+                  <Literal x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="Literal`1_11" />
+                </InArgument>
+              </uga:ForEachEmailConnections.IncludeSubfolders>
+              <uga:ForEachEmailConnections.MarkAsRead>
+                <InArgument x:TypeArguments="x:Boolean">
+                  <Literal x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="Literal`1_17" />
+                </InArgument>
+              </uga:ForEachEmailConnections.MarkAsRead>
+              <uga:ForEachEmailConnections.MaxResults>
+                <InArgument x:TypeArguments="x:Int32">
+                  <Literal x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="Literal`1_12" Value="300" />
+                </InArgument>
+              </uga:ForEachEmailConnections.MaxResults>
+              <uga:ForEachEmailConnections.StarredOnly>
+                <InArgument x:TypeArguments="x:Boolean">
+                  <Literal x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="Literal`1_16" />
+                </InArgument>
+              </uga:ForEachEmailConnections.StarredOnly>
+              <uga:ForEachEmailConnections.UnreadOnly>
+                <InArgument x:TypeArguments="x:Boolean">
+                  <Literal x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="Literal`1_13" />
+                </InArgument>
+              </uga:ForEachEmailConnections.UnreadOnly>
+              <uga:ForEachEmailConnections.WithAttachmentsOnly>
+                <InArgument x:TypeArguments="x:Boolean">
+                  <Literal x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="Literal`1_14" />
+                </InArgument>
+              </uga:ForEachEmailConnections.WithAttachmentsOnly>
+            </uga:ForEachEmailConnections>
+          </Sequence>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="694,92" sap2010:WorkflowViewState.IdRef="Sequence_34">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Sequence>
+      </If.Else>
+    </If>
+    <ui:LogMessage DisplayName="Log - Gmail Concluído" sap:VirtualizedContainerService.HintSize="696,170" sap2010:WorkflowViewState.IdRef="LogMessage_B7A4DE" Message="[&quot;[Gmail] Captura concluída com sucesso!&quot;]">
+      <ui:LogMessage.Level>
+        <InArgument x:TypeArguments="ui:LogLevel">
+          <Literal x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="Literal`1_2" Value="Info" />
+        </InArgument>
+      </ui:LogMessage.Level>
+    </ui:LogMessage>
+  </Sequence>
+</Activity>

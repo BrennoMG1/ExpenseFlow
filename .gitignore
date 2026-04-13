@@ -1,0 +1,18 @@
+# Credenciais — NUNCA subir!
+web-platform/.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# UiPath
+.local/
+*.uiproj
+project.uiproj
+
+# Sistema
+.DS_Store
+Thumbs.db
