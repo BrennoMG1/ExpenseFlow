@@ -1,6 +1,7 @@
 # Credenciais
-**/.env.*
+.env.*
 !**/.env.example
+web-platform/backend/.env.*
 # Python
 __pycache__/
 *.pyc
