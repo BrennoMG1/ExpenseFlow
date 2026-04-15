@@ -1,10 +1,11 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ucas="clr-namespace:UiPath.Core.Activities.Storage;assembly=UiPath.System.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="UiPathEventConnector" Type="InArgument(x:String)" />
     <x:Property Name="UiPathEvent" Type="InArgument(x:String)" />
     <x:Property Name="UiPathEventObjectType" Type="InArgument(x:String)" />
     <x:Property Name="UiPathEventObjectId" Type="InArgument(x:String)" />
     <x:Property Name="UiPathAdditionalEventData" Type="InArgument(x:String)" />
+    <x:Property Name="in_ConnectionId" Type="InArgument(x:String)" />
   </x:Members>
   <this:Main.UiPathEventConnector>
     <InArgument x:TypeArguments="x:String" />
@@ -169,6 +170,8 @@
       <x:String>System.Net.NetworkInformation</x:String>
       <x:String>System.Net.Security</x:String>
       <x:String>System.Net.Sockets</x:String>
+      <x:String>UiPath.Core.Activities.Storage</x:String>
+      <x:String>UiPath.Core.Activities.Orchestrator</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -289,7 +292,7 @@
       <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
     </scg:Dictionary>
   </sap:WorkflowViewStateService.ViewState>
-  <Sequence sap:VirtualizedContainerService.HintSize="1132,2065" sap2010:WorkflowViewState.IdRef="Sequence_3">
+  <Sequence sap:VirtualizedContainerService.HintSize="1120,2527" sap2010:WorkflowViewState.IdRef="Sequence_5">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="str_CaminhoArquivo" />
       <Variable x:TypeArguments="x:String" Name="str_Assunto" />
@@ -302,182 +305,207 @@
       <Variable x:TypeArguments="x:Boolean" Name="bln_Sucesso" />
       <Variable x:TypeArguments="x:Boolean" Name="bln_Duplicata" />
       <Variable x:TypeArguments="x:String" Name="in_CaminhoArquivo" />
-      <Variable x:TypeArguments="x:String" Name="in_ConnectionId" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:ManualTrigger Result="{x:Null}" DisplayName="Manual Trigger" sap:VirtualizedContainerService.HintSize="450,79" sap2010:WorkflowViewState.IdRef="ManualTrigger_2" />
-    <ui:LogMessage DisplayName="Log - Separador Início" sap:VirtualizedContainerService.HintSize="450,179" sap2010:WorkflowViewState.IdRef="LogMessage_15">
+    <ui:ManualTrigger Result="{x:Null}" DisplayName="Manual Trigger" sap:VirtualizedContainerService.HintSize="450,79" sap2010:WorkflowViewState.IdRef="ManualTrigger_4" />
+    <ui:LogMessage DisplayName="Log - Separador Início" sap:VirtualizedContainerService.HintSize="450,179" sap2010:WorkflowViewState.IdRef="LogMessage_29">
       <ui:LogMessage.Level>
         <InArgument x:TypeArguments="ui:LogLevel">
-          <Literal x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="Literal`1_1" Value="Info" />
+          <Literal x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="Literal`1_11" Value="Info" />
         </InArgument>
       </ui:LogMessage.Level>
       <ui:LogMessage.Message>
         <InArgument x:TypeArguments="x:Object">
-          <VisualBasicValue x:TypeArguments="x:Object" ExpressionText="&quot;============================================&quot;" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_1" />
+          <VisualBasicValue x:TypeArguments="x:Object" ExpressionText="&quot;============================================&quot;" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_29" />
         </InArgument>
       </ui:LogMessage.Message>
     </ui:LogMessage>
-    <ui:LogMessage DisplayName="Log - Título ExpenseFlow 2.0" sap:VirtualizedContainerService.HintSize="450,179" sap2010:WorkflowViewState.IdRef="LogMessage_16">
+    <ui:LogMessage DisplayName="Log - Título ExpenseFlow 1.0" sap:VirtualizedContainerService.HintSize="450,179" sap2010:WorkflowViewState.IdRef="LogMessage_30" Message="[&quot;  ExpenseFlow 1.0 — Motor de Ingestão RPA&quot;]">
       <ui:LogMessage.Level>
         <InArgument x:TypeArguments="ui:LogLevel">
-          <Literal x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="Literal`1_2" Value="Info" />
+          <Literal x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="Literal`1_12" Value="Info" />
+        </InArgument>
+      </ui:LogMessage.Level>
+    </ui:LogMessage>
+    <ui:LogMessage DisplayName="Log - Data da Execução" sap:VirtualizedContainerService.HintSize="450,179" sap2010:WorkflowViewState.IdRef="LogMessage_31">
+      <ui:LogMessage.Level>
+        <InArgument x:TypeArguments="ui:LogLevel">
+          <Literal x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="Literal`1_13" Value="Info" />
         </InArgument>
       </ui:LogMessage.Level>
       <ui:LogMessage.Message>
         <InArgument x:TypeArguments="x:Object">
-          <VisualBasicValue x:TypeArguments="x:Object" ExpressionText="&quot;  ExpenseFlow 2.0 — Motor de Ingestão RPA&quot;" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_2" />
+          <VisualBasicValue x:TypeArguments="x:Object" ExpressionText="&quot;  Execução: &quot; &amp; Date.Now.ToString(&quot;dd/MM/yyyy HH:mm:ss&quot;)" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_31" />
         </InArgument>
       </ui:LogMessage.Message>
     </ui:LogMessage>
-    <ui:LogMessage DisplayName="Log - Data da Execução" sap:VirtualizedContainerService.HintSize="450,179" sap2010:WorkflowViewState.IdRef="LogMessage_17">
-      <ui:LogMessage.Level>
-        <InArgument x:TypeArguments="ui:LogLevel">
-          <Literal x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="Literal`1_3" Value="Info" />
-        </InArgument>
-      </ui:LogMessage.Level>
-      <ui:LogMessage.Message>
-        <InArgument x:TypeArguments="x:Object">
-          <VisualBasicValue x:TypeArguments="x:Object" ExpressionText="&quot;  Execução: &quot; &amp; Date.Now.ToString(&quot;dd/MM/yyyy HH:mm:ss&quot;)" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_3" />
-        </InArgument>
-      </ui:LogMessage.Message>
-    </ui:LogMessage>
-    <Assign DisplayName="Definir Caminho do Arquivo de Dados Excel" sap:VirtualizedContainerService.HintSize="450,179" sap2010:WorkflowViewState.IdRef="Assign_3">
+    <Assign DisplayName="Definir Caminho do Arquivo de Dados Excel" sap:VirtualizedContainerService.HintSize="450,179" sap2010:WorkflowViewState.IdRef="Assign_6">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">
-          <VisualBasicReference x:TypeArguments="x:String" ExpressionText="str_CaminhoArquivo" sap2010:WorkflowViewState.IdRef="VisualBasicReference`1_1" />
+          <VisualBasicReference x:TypeArguments="x:String" ExpressionText="str_CaminhoArquivo" sap2010:WorkflowViewState.IdRef="VisualBasicReference`1_2" />
         </OutArgument>
       </Assign.To>
       <Assign.Value>
         <InArgument x:TypeArguments="x:String">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Path.Combine(Path.GetTempPath(), &quot;ExpenseFlow_Dados.xlsx&quot;)" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_4" />
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="Path.Combine(Path.GetTempPath(), &quot;ExpenseFlow_Dados.xlsx&quot;)" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_32" />
         </InArgument>
       </Assign.Value>
     </Assign>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Inicializar Planilha de Dados" sap:VirtualizedContainerService.HintSize="450,180" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Inicializar Planilha de Dados" sap:VirtualizedContainerService.HintSize="450,180" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_12" UnSafe="False">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="x:String" x:Key="in_CaminhoArquivo">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="str_CaminhoArquivo" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_9" />
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="str_CaminhoArquivo" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_39" />
         </InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="UiPathAdditionalEventData">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="UiPathAdditionalEventData" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_10" />
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="UiPathAdditionalEventData" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_40" />
         </InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="UiPathEvent">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="UiPathEvent" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_11" />
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="UiPathEvent" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_41" />
         </InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="UiPathEventConnector">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="UiPathEventConnector" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_12" />
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="UiPathEventConnector" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_42" />
         </InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="UiPathEventObjectId">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="UiPathEventObjectId" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_13" />
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="UiPathEventObjectId" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_43" />
         </InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="UiPathEventObjectType">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="UiPathEventObjectType" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_14" />
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="UiPathEventObjectType" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_44" />
         </InArgument>
       </ui:InvokeWorkflowFile.Arguments>
       <ui:InvokeWorkflowFile.WorkflowFileName>
         <InArgument x:TypeArguments="x:String">
-          <Literal x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="Literal`1_4">Workflows\InicializarPlanilha.xaml</Literal>
+          <Literal x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="Literal`1_14">Workflows\InicializarPlanilha.xaml</Literal>
         </InArgument>
       </ui:InvokeWorkflowFile.WorkflowFileName>
     </ui:InvokeWorkflowFile>
-    <ui:LogMessage DisplayName="Log - Iniciando Motor Gmail" sap:VirtualizedContainerService.HintSize="450,179" sap2010:WorkflowViewState.IdRef="LogMessage_18">
+    <ui:LogMessage DisplayName="Log - Iniciando Motor Gmail" sap:VirtualizedContainerService.HintSize="450,179" sap2010:WorkflowViewState.IdRef="LogMessage_32">
       <ui:LogMessage.Level>
         <InArgument x:TypeArguments="ui:LogLevel">
-          <Literal x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="Literal`1_5" Value="Info" />
+          <Literal x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="Literal`1_15" Value="Info" />
         </InArgument>
       </ui:LogMessage.Level>
       <ui:LogMessage.Message>
         <InArgument x:TypeArguments="x:Object">
-          <VisualBasicValue x:TypeArguments="x:Object" ExpressionText="&quot;  [MOTOR 1/2] Capturando e-mails Gmail...&quot;" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_5" />
+          <VisualBasicValue x:TypeArguments="x:Object" ExpressionText="&quot;  [MOTOR 1/2] Capturando e-mails Gmail...&quot;" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_33" />
         </InArgument>
       </ui:LogMessage.Message>
     </ui:LogMessage>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Motor Gmail — Capturar e Processar E-mails" sap:VirtualizedContainerService.HintSize="450,180" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False">
-      <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="UiPathEventConnector">[UiPathEventConnector]</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="UiPathEvent">[UiPathEvent]</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="UiPathEventObjectType">[UiPathEventObjectType]</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="UiPathEventObjectId">[UiPathEventObjectId]</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="UiPathAdditionalEventData">[UiPathAdditionalEventData]</InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_CaminhoArquivo">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="str_CaminhoArquivo" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_15" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_ConnectionId">[in_ConnectionId]</InArgument>
-      </ui:InvokeWorkflowFile.Arguments>
-      <ui:InvokeWorkflowFile.WorkflowFileName>
-        <InArgument x:TypeArguments="x:String">
-          <Literal x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="Literal`1_6">Workflows\Gmail\CapturarEmailsGmail.xaml</Literal>
-        </InArgument>
-      </ui:InvokeWorkflowFile.WorkflowFileName>
-    </ui:InvokeWorkflowFile>
-    <ui:LogMessage DisplayName="Log - Iniciando Motor Outlook" sap:VirtualizedContainerService.HintSize="450,179" sap2010:WorkflowViewState.IdRef="LogMessage_19">
-      <ui:LogMessage.Level>
-        <InArgument x:TypeArguments="ui:LogLevel">
-          <Literal x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="Literal`1_7" Value="Info" />
-        </InArgument>
-      </ui:LogMessage.Level>
-      <ui:LogMessage.Message>
-        <InArgument x:TypeArguments="x:Object">
-          <VisualBasicValue x:TypeArguments="x:Object" ExpressionText="&quot;  [MOTOR 2/2] Capturando e-mails Outlook (Office 365)...&quot;" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_6" />
-        </InArgument>
-      </ui:LogMessage.Message>
-    </ui:LogMessage>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Motor Outlook — Capturar e Processar E-mails" sap:VirtualizedContainerService.HintSize="450,180" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Motor Gmail — Capturar e Processar E-mails" sap:VirtualizedContainerService.HintSize="450,180" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_13" UnSafe="False">
       <ui:InvokeWorkflowFile.Arguments>
         <InArgument x:TypeArguments="x:String" x:Key="in_CaminhoArquivo">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="str_CaminhoArquivo" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_16" />
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="str_CaminhoArquivo" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_45" />
         </InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="in_ConnectionId">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_ConnectionId" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_17" />
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_ConnectionId" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_46" />
         </InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="UiPathAdditionalEventData">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="UiPathAdditionalEventData" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_18" />
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="UiPathAdditionalEventData" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_47" />
         </InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="UiPathEvent">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="UiPathEvent" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_19" />
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="UiPathEvent" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_48" />
         </InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="UiPathEventConnector">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="UiPathEventConnector" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_20" />
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="UiPathEventConnector" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_49" />
         </InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="UiPathEventObjectId">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="UiPathEventObjectId" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_21" />
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="UiPathEventObjectId" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_50" />
         </InArgument>
         <InArgument x:TypeArguments="x:String" x:Key="UiPathEventObjectType">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="UiPathEventObjectType" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_22" />
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="UiPathEventObjectType" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_51" />
         </InArgument>
       </ui:InvokeWorkflowFile.Arguments>
       <ui:InvokeWorkflowFile.WorkflowFileName>
         <InArgument x:TypeArguments="x:String">
-          <Literal x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="Literal`1_8">Workflows\Outlook\CapturarEmailsOutlook.xaml</Literal>
+          <Literal x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="Literal`1_16">Workflows\Gmail\CapturarEmailsGmail.xaml</Literal>
         </InArgument>
       </ui:InvokeWorkflowFile.WorkflowFileName>
     </ui:InvokeWorkflowFile>
-    <ui:LogMessage DisplayName="Log - Ciclo Concluído" sap:VirtualizedContainerService.HintSize="450,179" sap2010:WorkflowViewState.IdRef="LogMessage_20">
+    <ui:LogMessage DisplayName="Log - Iniciando Motor Outlook" sap:VirtualizedContainerService.HintSize="450,179" sap2010:WorkflowViewState.IdRef="LogMessage_33">
       <ui:LogMessage.Level>
         <InArgument x:TypeArguments="ui:LogLevel">
-          <Literal x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="Literal`1_9" Value="Info" />
+          <Literal x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="Literal`1_17" Value="Info" />
         </InArgument>
       </ui:LogMessage.Level>
       <ui:LogMessage.Message>
         <InArgument x:TypeArguments="x:Object">
-          <VisualBasicValue x:TypeArguments="x:Object" ExpressionText="&quot;  ExpenseFlow 2.0 — Ciclo de ingestão concluído com sucesso!&quot;" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_7" />
+          <VisualBasicValue x:TypeArguments="x:Object" ExpressionText="&quot;  [MOTOR 2/2] Capturando e-mails Outlook (Office 365)...&quot;" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_34" />
         </InArgument>
       </ui:LogMessage.Message>
     </ui:LogMessage>
-    <ui:LogMessage DisplayName="Log - Separador Fim" sap:VirtualizedContainerService.HintSize="450,170" sap2010:WorkflowViewState.IdRef="LogMessage_21">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Motor Outlook — Capturar e Processar E-mails" sap:VirtualizedContainerService.HintSize="450,180" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_14" UnSafe="False">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_CaminhoArquivo">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="str_CaminhoArquivo" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_52" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_ConnectionId">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_ConnectionId" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_53" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="UiPathAdditionalEventData">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="UiPathAdditionalEventData" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_54" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="UiPathEvent">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="UiPathEvent" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_55" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="UiPathEventConnector">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="UiPathEventConnector" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_56" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="UiPathEventObjectId">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="UiPathEventObjectId" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_57" />
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="UiPathEventObjectType">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="UiPathEventObjectType" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_58" />
+        </InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+      <ui:InvokeWorkflowFile.WorkflowFileName>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="Literal`1_18">Workflows\Outlook\CapturarEmailsOutlook.xaml</Literal>
+        </InArgument>
+      </ui:InvokeWorkflowFile.WorkflowFileName>
+    </ui:InvokeWorkflowFile>
+    <ui:LogMessage DisplayName="Log - Iniciando Upload Bucket" sap:VirtualizedContainerService.HintSize="450,179" sap2010:WorkflowViewState.IdRef="LogMessage_New1">
       <ui:LogMessage.Level>
         <InArgument x:TypeArguments="ui:LogLevel">
-          <Literal x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="Literal`1_10" Value="Info" />
+          <Literal x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="Literal`1_19" Value="Info" />
         </InArgument>
       </ui:LogMessage.Level>
       <ui:LogMessage.Message>
         <InArgument x:TypeArguments="x:Object">
-          <VisualBasicValue x:TypeArguments="x:Object" ExpressionText="&quot;============================================&quot;" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_8" />
+          <VisualBasicValue x:TypeArguments="x:Object" ExpressionText="&quot;[BUCKET] Enviando Excel para o Storage Bucket...&quot;" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_35" />
+        </InArgument>
+      </ui:LogMessage.Message>
+    </ui:LogMessage>
+    <ucas:UploadStorageFile FileResource="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Upload Excel → ExpenseFlow Bucket" sap:VirtualizedContainerService.HintSize="450,283" sap2010:WorkflowViewState.IdRef="UploadStorageFile_1" StorageBucketName="ExpenseFlow-bucket">
+      <ucas:UploadStorageFile.Destination>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="Literal`1_20">ExpenseFlow_Dados.xlsx</Literal>
+        </InArgument>
+      </ucas:UploadStorageFile.Destination>
+      <ucas:UploadStorageFile.Path>
+        <InArgument x:TypeArguments="x:String">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="str_CaminhoArquivo" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_36" />
+        </InArgument>
+      </ucas:UploadStorageFile.Path>
+    </ucas:UploadStorageFile>
+    <ui:LogMessage DisplayName="Log - Ciclo Concluído" sap:VirtualizedContainerService.HintSize="450,179" sap2010:WorkflowViewState.IdRef="LogMessage_34" Message="[&quot;  ExpenseFlow 1.0 — Ciclo de ingestão concluído com sucesso!&quot;]">
+      <ui:LogMessage.Level>
+        <InArgument x:TypeArguments="ui:LogLevel">
+          <Literal x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="Literal`1_21" Value="Info" />
+        </InArgument>
+      </ui:LogMessage.Level>
+    </ui:LogMessage>
+    <ui:LogMessage DisplayName="Log - Separador Fim" sap:VirtualizedContainerService.HintSize="450,170" sap2010:WorkflowViewState.IdRef="LogMessage_35">
+      <ui:LogMessage.Level>
+        <InArgument x:TypeArguments="ui:LogLevel">
+          <Literal x:TypeArguments="ui:LogLevel" sap2010:WorkflowViewState.IdRef="Literal`1_22" Value="Info" />
+        </InArgument>
+      </ui:LogMessage.Level>
+      <ui:LogMessage.Message>
+        <InArgument x:TypeArguments="x:Object">
+          <VisualBasicValue x:TypeArguments="x:Object" ExpressionText="&quot;============================================&quot;" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_38" />
         </InArgument>
       </ui:LogMessage.Message>
     </ui:LogMessage>

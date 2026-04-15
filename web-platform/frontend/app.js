@@ -1,5 +1,5 @@
 /* =====================================================
-   ExpenseFlow 2.0  —  Frontend Logic
+   ExpenseFlow 1.0  —  Frontend Logic
    ===================================================== */
 
 const API_BASE      = "";
@@ -175,11 +175,11 @@ async function iniciar() {
 // ── Polling de status ──────────────────────────────────
 function pollStatus(jobId, label) {
   return new Promise(function (resolve) {
-    var attempts       = 0;
-    var lastState      = "";
-    var errosSeguidos  = 0;
-    var jaAvisouPending = false;  // ← NOVO: controla mensagem de "aguardando"
-    var jaAvisouRunning = false;  // ← NOVO: controla mensagem de "em execução"
+    var attempts        = 0;
+    var lastState       = "";
+    var errosSeguidos   = 0;
+    var jaAvisouPending = false;
+    var jaAvisouRunning = false;
 
     var timer = setInterval(async function () {
       attempts++;
@@ -203,19 +203,16 @@ function pollStatus(jobId, label) {
         errosSeguidos = 0;
         var status = await res.json();
 
-        // ── Mudança de estado: exibe sempre ───────────
         if (status.state !== lastState) {
           lastState = status.state;
           addLog("Status: " + status.state);
         }
 
-        // ── "Aguardando robô" — aparece só UMA vez ────
         if (status.stateRaw === "Pending" && !jaAvisouPending) {
           addLog("Aguardando robô disponível...");
           jaAvisouPending = true;
         }
 
-        // ── "Em execução" — aparece só UMA vez ────────
         if (status.stateRaw === "Running" && !jaAvisouRunning) {
           addLog("Robô em execução — isso pode demorar alguns minutos...");
           jaAvisouRunning = true;
@@ -242,7 +239,7 @@ function pollStatus(jobId, label) {
 }
 
 // ── Sucesso ────────────────────────────────────────────
-async function showSuccess(label, status) {
+function showSuccess(label, status) {
   okDesc.textContent = "Transações capturadas de: " + label + ".";
   okMeta.innerHTML =
     "<strong>Conta:</strong> "  + label                        + "<br>" +
@@ -250,43 +247,6 @@ async function showSuccess(label, status) {
     "<strong>Fim:</strong> "    + formatDate(status.endTime)   + "<br>" +
     "<strong>Job ID:</strong> " + status.jobId;
   showState("success");
-  setTimeout(async function () { await carregarTabela(); }, 1000);
-}
-
-// ── Tabela ─────────────────────────────────────────────
-async function carregarTabela() {
-  try {
-    var res = await fetch(API_BASE + "/api/dados");
-    if (!res.ok) return;
-    var data = await res.json();
-
-    if (!data.rows || data.rows.length === 0) {
-      document.getElementById("tabela-total").textContent = "Nenhuma transação encontrada.";
-      document.getElementById("tabela-wrap").classList.remove("hidden");
-      return;
-    }
-
-    var thead = document.getElementById("tabela-head");
-    var trHead = document.createElement("tr");
-    data.headers.forEach(function (h) {
-      var th = document.createElement("th"); th.textContent = h; trHead.appendChild(th);
-    });
-    thead.innerHTML = ""; thead.appendChild(trHead);
-
-    var tbody = document.getElementById("tabela-body");
-    tbody.innerHTML = "";
-    data.rows.forEach(function (row) {
-      var tr = document.createElement("tr");
-      row.forEach(function (cell) {
-        var td = document.createElement("td"); td.textContent = cell; tr.appendChild(td);
-      });
-      tbody.appendChild(tr);
-    });
-
-    document.getElementById("tabela-total").textContent =
-      data.total + " transação(ões) registrada(s)";
-    document.getElementById("tabela-wrap").classList.remove("hidden");
-  } catch (e) {}
 }
 
 // ── Botões ─────────────────────────────────────────────
@@ -303,8 +263,6 @@ btnNew.addEventListener("click", function () {
     i.classList.remove("selected");
   });
   okMeta.innerHTML = ""; okDesc.textContent = "";
-  var tw = document.getElementById("tabela-wrap");
-  if (tw) tw.classList.add("hidden");
   showState("form");
 });
 

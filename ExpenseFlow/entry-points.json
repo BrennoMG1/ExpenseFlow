@@ -1,0 +1,295 @@
+{
+  "$schema": "https://cloud.uipath.com/draft/2024-12/entry-point",
+  "entryPoints": [
+    {
+      "filePath": "Main.xaml",
+      "uniqueId": "5a39a5b6-5479-4d8a-8ed2-0867303f7e23",
+      "type": "process",
+      "input": {
+        "type": "object",
+        "properties": {
+          "UiPathEventConnector": {
+            "type": "string"
+          },
+          "UiPathEvent": {
+            "type": "string"
+          },
+          "UiPathEventObjectType": {
+            "type": "string"
+          },
+          "UiPathEventObjectId": {
+            "type": "string"
+          },
+          "UiPathAdditionalEventData": {
+            "type": "string"
+          },
+          "in_ConnectionId": {
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "filePath": "Workflows\\EnviarParaAPI.xaml",
+      "uniqueId": "8b478886-2d63-4f13-a24e-2f3dca3628c9",
+      "type": "process"
+    },
+    {
+      "filePath": "Workflows\\Gmail\\CapturarEmailsGmail.xaml",
+      "uniqueId": "89a7a7ec-dc01-4581-afd3-54b47c311b25",
+      "type": "process",
+      "input": {
+        "type": "object",
+        "properties": {
+          "UiPathEventConnector": {
+            "type": "string"
+          },
+          "UiPathEvent": {
+            "type": "string"
+          },
+          "UiPathEventObjectType": {
+            "type": "string"
+          },
+          "UiPathEventObjectId": {
+            "type": "string"
+          },
+          "UiPathAdditionalEventData": {
+            "type": "string"
+          },
+          "in_CaminhoArquivo": {
+            "type": "string"
+          },
+          "in_ConnectionId": {
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "filePath": "Workflows\\InicializarPlanilha.xaml",
+      "uniqueId": "b78ca7e0-aef9-4fbb-abf0-2eba96f54eb9",
+      "type": "process",
+      "input": {
+        "type": "object",
+        "properties": {
+          "UiPathEventConnector": {
+            "type": "string"
+          },
+          "UiPathEvent": {
+            "type": "string"
+          },
+          "UiPathEventObjectType": {
+            "type": "string"
+          },
+          "UiPathEventObjectId": {
+            "type": "string"
+          },
+          "UiPathAdditionalEventData": {
+            "type": "string"
+          },
+          "in_CaminhoArquivo": {
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "filePath": "Workflows\\Outlook\\CapturarEmailsOutlook.xaml",
+      "uniqueId": "dfeedd91-06e3-4536-84de-bd5882cd92bd",
+      "type": "process",
+      "input": {
+        "type": "object",
+        "properties": {
+          "UiPathEventConnector": {
+            "type": "string"
+          },
+          "UiPathEvent": {
+            "type": "string"
+          },
+          "UiPathEventObjectType": {
+            "type": "string"
+          },
+          "UiPathEventObjectId": {
+            "type": "string"
+          },
+          "UiPathAdditionalEventData": {
+            "type": "string"
+          },
+          "in_CaminhoArquivo": {
+            "type": "string"
+          },
+          "in_ConnectionId": {
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "filePath": "Workflows\\Processamento\\EnviarParaAPI.xaml",
+      "uniqueId": "130dfad8-b233-4f49-a7fb-3bb20a68388a",
+      "type": "process",
+      "input": {
+        "type": "object",
+        "properties": {
+          "UiPathEventConnector": {
+            "type": "string"
+          },
+          "UiPathEvent": {
+            "type": "string"
+          },
+          "UiPathEventObjectType": {
+            "type": "string"
+          },
+          "UiPathEventObjectId": {
+            "type": "string"
+          },
+          "UiPathAdditionalEventData": {
+            "type": "string"
+          },
+          "in_Hash": {
+            "type": "string"
+          },
+          "in_Data": {
+            "type": "string"
+          },
+          "in_Descricao": {
+            "type": "string"
+          },
+          "in_Valor": {
+            "type": "integer",
+            "minimum": -79228162514264337593543950335,
+            "maximum": 79228162514264337593543950335
+          },
+          "in_Categoria": {
+            "type": "string"
+          },
+          "in_Origem": {
+            "type": "string"
+          },
+          "in_CaminhoArquivo": {
+            "type": "string"
+          },
+          "in_FormaPagamento": {
+            "type": "string"
+          }
+        },
+        "required": []
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "out_Sucesso": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    {
+      "filePath": "Workflows\\Processamento\\ExtrairDadosTransacao.xaml",
+      "uniqueId": "84efc0a8-f7ad-46b1-8b59-5e4b4a7ca5bd",
+      "type": "process",
+      "input": {
+        "type": "object",
+        "properties": {
+          "UiPathEventConnector": {
+            "type": "string"
+          },
+          "UiPathEvent": {
+            "type": "string"
+          },
+          "UiPathEventObjectType": {
+            "type": "string"
+          },
+          "UiPathEventObjectId": {
+            "type": "string"
+          },
+          "UiPathAdditionalEventData": {
+            "type": "string"
+          },
+          "in_CorpoEmail": {
+            "type": "string"
+          },
+          "in_AssuntoEmail": {
+            "type": "string"
+          },
+          "in_Origem": {
+            "type": "string"
+          },
+          "in_DataEmail": {
+            "type": "string"
+          }
+        },
+        "required": []
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "out_Data": {
+            "type": "string"
+          },
+          "out_Descricao": {
+            "type": "string"
+          },
+          "out_Valor": {
+            "type": "integer",
+            "minimum": -79228162514264337593543950335,
+            "maximum": 79228162514264337593543950335
+          },
+          "out_Categoria": {
+            "type": "string"
+          },
+          "out_Sucesso": {
+            "type": "boolean"
+          },
+          "out_FormaPagamento": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "filePath": "Workflows\\Processamento\\VerificarDuplicata.xaml",
+      "uniqueId": "e906845d-2884-4de5-97a4-3429ecef5849",
+      "type": "process",
+      "input": {
+        "type": "object",
+        "properties": {
+          "UiPathEventConnector": {
+            "type": "string"
+          },
+          "UiPathEvent": {
+            "type": "string"
+          },
+          "UiPathEventObjectType": {
+            "type": "string"
+          },
+          "UiPathEventObjectId": {
+            "type": "string"
+          },
+          "UiPathAdditionalEventData": {
+            "type": "string"
+          },
+          "in_Hash": {
+            "type": "string"
+          },
+          "in_CaminhoArquivo": {
+            "type": "string"
+          }
+        },
+        "required": []
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "out_Duplicata": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  ]
+}

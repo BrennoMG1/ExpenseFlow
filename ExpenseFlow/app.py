@@ -1,4 +1,4 @@
-﻿"""
+"""
 ExpenseFlow — Backend FastAPI (v2 — Storage Bucket)
 """
 
@@ -27,7 +27,7 @@ log = logging.getLogger("expenseflow")
 # ------------------------------------------------------------------ #
 #  App                                                                 #
 # ------------------------------------------------------------------ #
-app = FastAPI(title="ExpenseFlow API", version="1.0.0")
+app = FastAPI(title="ExpenseFlow API", version="2.0.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -40,14 +40,14 @@ orchestrator = OrchestratorClient()
 FRONTEND_DIR = Path(__file__).parent.parent / "frontend"
 
 # ------------------------------------------------------------------ #
-#  Storage Bucket (produção — Cloud Robot)                            #
+#  Storage Bucket (producao — Cloud Robot)                            #
 # ------------------------------------------------------------------ #
 BUCKET_NAME      = os.getenv("BUCKET_NAME", "ExpenseFlow-bucket")
 BUCKET_FILE      = os.getenv("BUCKET_FILE", "ExpenseFlow_Dados.xlsx")
 ORCHESTRATOR_URL = os.getenv("ORCHESTRATOR_URL", "").rstrip("/")
-FOLDER_ID        = os.getenv("FOLDER_ID", "7706457")
 UIPATH_ORG       = os.getenv("UIPATH_ORG", "")
 UIPATH_TENANT    = os.getenv("UIPATH_TENANT", "")
+FOLDER_ID        = os.getenv("FOLDER_ID", "7706457")
 
 # URL base da API do Orchestrator
 # Formato: https://cloud.uipath.com/{org}/{tenant}/orchestrator_
@@ -110,13 +110,13 @@ async def _baixar_excel_do_bucket() -> bytes:
     Baixa o arquivo Excel do Storage Bucket via API do Orchestrator.
     Fluxo:
       1. Autentica e busca o ID do bucket pelo nome
-      2. Obtém uma URI de download temporária (válida 5 min)
+      2. Obtem uma URI de download temporaria (valida 5 min)
       3. Faz o download dos bytes do arquivo
     """
     try:
         token = await orchestrator._get_token()
         headers = {
-            "Authorization":              f"Bearer {token}",
+            "Authorization":               f"Bearer {token}",
             "X-UIPATH-OrganizationUnitId": FOLDER_ID,
         }
 
@@ -137,13 +137,13 @@ async def _baixar_excel_do_bucket() -> bytes:
             if not buckets:
                 raise HTTPException(
                     status_code=404,
-                    detail=f"Bucket '{BUCKET_NAME}' não encontrado no Orchestrator."
+                    detail=f"Bucket '{BUCKET_NAME}' nao encontrado no Orchestrator."
                 )
 
             bucket_id = buckets[0]["Id"]
             log.info(f"[bucket] Bucket '{BUCKET_NAME}' encontrado. ID: {bucket_id}")
 
-            # 2 — Obter URI de leitura temporária
+            # 2 — Obter URI de leitura temporaria
             resp_uri = await client.get(
                 f"{BASE_API_URL}/odata/StorageBuckets({bucket_id})"
                 f"/UiPath.Server.Configuration.OData.GetReadUri",
@@ -156,7 +156,7 @@ async def _baixar_excel_do_bucket() -> bytes:
             if not download_url:
                 raise HTTPException(
                     status_code=502,
-                    detail="Orchestrator não retornou URI de download do bucket."
+                    detail="Orchestrator nao retornou URI de download do bucket."
                 )
 
             # 3 — Baixar os bytes do arquivo
@@ -175,7 +175,7 @@ async def _baixar_excel_do_bucket() -> bytes:
 
 
 async def _obter_excel_bytes() -> bytes:
-    if ORCHESTRATOR_URL:
+    if ORCHESTRATOR_URL and UIPATH_ORG and UIPATH_TENANT:
         try:
             return await _baixar_excel_do_bucket()
         except HTTPException as e:
@@ -187,7 +187,7 @@ async def _obter_excel_bytes() -> bytes:
 
     raise HTTPException(
         status_code=404,
-        detail="Nenhum dado encontrado. Execute o robô primeiro."
+        detail="Nenhum dado encontrado. Execute o robo primeiro."
     )
 
 # ------------------------------------------------------------------ #
@@ -196,7 +196,7 @@ async def _obter_excel_bytes() -> bytes:
 
 @app.get("/api/contas")
 async def get_contas():
-    """Retorna as contas disponíveis para o dropdown do frontend."""
+    """Retorna as contas disponiveis para o dropdown do frontend."""
     return {"contas": CONTAS}
 
 
@@ -207,7 +207,7 @@ async def processar(request: ProcessRequest):
 
     try:
         job = await orchestrator.start_job(request.connection_id)
-        log.info(f"[job] Iniciado para '{label}' → JobId: {job['Id']}")
+        log.info(f"[job] Iniciado para '{label}' -> JobId: {job['Id']}")
         return {
             "success": True,
             "jobId":   str(job["Id"]),
@@ -230,7 +230,7 @@ async def get_status(job_id: str):
 
 @app.get("/api/dados")
 async def get_dados():
-    """Lê os dados do Excel (bucket ou local) e retorna como JSON para a tabela."""
+    """Le os dados do Excel (bucket ou local) e retorna como JSON para a tabela."""
     try:
         import openpyxl
         excel_bytes = await _obter_excel_bytes()
@@ -248,7 +248,7 @@ async def get_dados():
     except ImportError:
         raise HTTPException(
             status_code=500,
-            detail="Dependência 'openpyxl' não instalada. Execute: pip install openpyxl"
+            detail="Dependencia 'openpyxl' nao instalada. Execute: pip install openpyxl"
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Erro ao ler dados: {str(e)}")
@@ -268,14 +268,15 @@ async def download_excel():
 @app.get("/api/health")
 async def health():
     return {
-        "status":      "ok",
-        "service":     "ExpenseFlow",
-        "version":     "1.0.0",
-        "bucket_name": BUCKET_NAME,
-        "bucket_file": BUCKET_FILE,
-        "local_excel": str(EXCEL_PATH),
-        "local_ok":    EXCEL_PATH.exists(),
-        "contas":      len([c for c in CONTAS if c["connectionId"]]),
+        "status":       "ok",
+        "service":      "ExpenseFlow",
+        "version":      "2.0.0",
+        "bucket_name":  BUCKET_NAME,
+        "bucket_file":  BUCKET_FILE,
+        "base_api_url": BASE_API_URL,
+        "local_excel":  str(EXCEL_PATH),
+        "local_ok":     EXCEL_PATH.exists(),
+        "contas":       len([c for c in CONTAS if c["connectionId"]]),
     }
 
 
@@ -289,7 +290,7 @@ async def serve_static(filename: str):
     file_path = FRONTEND_DIR / filename
     if file_path.exists() and file_path.is_file():
         return FileResponse(file_path)
-    raise HTTPException(status_code=404, detail="Arquivo não encontrado.")
+    raise HTTPException(status_code=404, detail="Arquivo nao encontrado.")
 
 
 if __name__ == "__main__":
